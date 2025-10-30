@@ -21,6 +21,9 @@ public class SkryptDodania: MonoBehaviour
         if (towerPrefab != null)
         {
             currentGhostTower = Instantiate(towerPrefab);
+            Tower towerScript = currentGhostTower.GetComponent<Tower>(); // Wieża duch nie strzela
+            if (towerScript != null)
+                towerScript.enabled = false;
 
             if (currentGhostTower.GetComponent<SpriteRenderer>() == null)
             {
@@ -56,7 +59,10 @@ public class SkryptDodania: MonoBehaviour
                 if (isValidPlacement)
                 {
                     // Jak tak to postaw wieżę na stałe
-                    Instantiate(towerPrefab, mouseWorldPosition, Quaternion.identity);
+                    GameObject placedTower = Instantiate(towerPrefab, mouseWorldPosition, Quaternion.identity); // Wieża dopiero po postawieniu strzela
+                    Tower towerScript = placedTower.GetComponent<Tower>();
+                    if (towerScript != null)
+                        towerScript.enabled = true;
 
                     // I usuń wieżę widmo
                     CleanupPlacement();
