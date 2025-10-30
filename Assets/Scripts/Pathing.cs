@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Hierarchy;
 using UnityEngine;
 
-public class Pathing: MonoBehaviour
+public class Pathing : MonoBehaviour
 {
     public float speed;
     public int MaxNum;
@@ -11,12 +11,11 @@ public class Pathing: MonoBehaviour
     public Transform movepoint;
     public Transform[] points;
 
-    private bool facingRight = true; 
+    private bool facingRight = true;
 
     void Start()
     {
         pointIndex = 0;
-        //Debug.Log("point0: " + points[pointIndex]);
         movepoint = points[pointIndex];
     }
 
@@ -31,11 +30,11 @@ public class Pathing: MonoBehaviour
     void Update()
     {
         if (pointIndex >= MaxNum) return;
-        
-        //ruch w stronê punktu
+
+        // ruch w stronÄ™ punktu
         transform.position = Vector2.MoveTowards(transform.position, movepoint.position, speed * Time.deltaTime);
-        
-        //sprawdzenie czy dotar³ do punktu
+
+        // sprawdzenie czy dotarÅ‚ do punktu
         if (Vector2.Distance(transform.position, movepoint.position) <= 0)
         {
             if (pointIndex > MaxNum)
@@ -49,21 +48,12 @@ public class Pathing: MonoBehaviour
 
             if (dirX > 0 && !facingRight)
             {
-                Flip(true); //prawo
+                Flip(true); // prawo
             }
             else if (dirX < 0 && facingRight)
             {
-                Flip(false); //lewo
+                Flip(false); // lewo
             }
         }
-        
-
-
-        //Vector2 pos = movepoint.position - transform.position;
-        //float angle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-        
     }
-
-    
 }
