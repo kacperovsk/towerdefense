@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1661442781881362735}
   - component: {fileID: 6281537190067084632}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Projectile1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597418eb493bc8641852d8a891baeb22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 4
+  speed: 8
   damage: 4
 --- !u!212 &6281537190067084632
 SpriteRenderer:
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 105169053199506356, guid: a9b6539e62e022f4289c7f222a12fb3b, type: 3}
+  m_Sprite: {fileID: 7862752841807127601, guid: 5f0453747ed1c68418894485c102d2ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
