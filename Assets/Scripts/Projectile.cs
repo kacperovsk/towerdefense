@@ -5,16 +5,18 @@ public class Projectile : MonoBehaviour
     private Enemy target;
     public float speed = 4f;
     public float damage = 4f;
-    private bool hasHit = false; // Czy juz uderzylo, Zapobiega multihitowi.
+    private bool hasHit = false; // prevents multiple hits
+
     public void SetTarget(Enemy _target)
     {
         target = _target;
     }
+
     void OnEnable()
     {
         hasHit = false;
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (target == null || !target.gameObject.activeInHierarchy)
@@ -26,6 +28,10 @@ public class Projectile : MonoBehaviour
         Vector3 dir = target.transform.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
+        // Rotate towards target
+        RotateTowards(dir);
+
+        // Move towards target
         if (dir.magnitude <= distanceThisFrame)
         {
             HitTarget();
@@ -33,6 +39,12 @@ public class Projectile : MonoBehaviour
         }
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+    }
+
+    void RotateTowards(Vector3 dir)
+    {
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
 
     void HitTarget()

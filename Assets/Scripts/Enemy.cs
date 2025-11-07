@@ -35,8 +35,16 @@ public class Enemy : MonoBehaviour
     }
     private void OnEnable()
     {
-        currentPosition = 0;
-        health = maxHealth;
+        // USTAWIENIE WAYPOINTA NA SPAWN
+        currentPosition = 0; 
+        // USTAWIANIE HP NA MAX NA SPAWN
+        health = maxHealth; 
+        // OBRACANIE W PRAWO NA SPAWN
+        facingRight = true;
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x);
+        transform.localScale = scale; 
+
         targetPosition = currentPath.GetPosition(currentPosition);
     }
 
