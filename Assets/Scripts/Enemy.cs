@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     private void Awake()
