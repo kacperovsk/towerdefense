@@ -6,7 +6,7 @@ public class SkryptDodania: MonoBehaviour
     public GameObject towerPrefab; 
     [Header("Tower Cost")]
     public int towerCost = 50;
-    public float placementCheckRadius = 1.0f;
+    public float placementCheckRadius = 0.3f;
     public Color validColor = new Color(0.2f, 1f, 0.2f, 0.5f); // Green, semi-transparent
     public Color invalidColor = new Color(1f, 0.2f, 0.2f, 0.5f); // Red, semi-transparent
     private GameObject currentGhostTower;
@@ -30,7 +30,11 @@ public class SkryptDodania: MonoBehaviour
             currentGhostTower = Instantiate(towerPrefab);
             Tower towerScript = currentGhostTower.GetComponent<Tower>(); // Wieża duch nie strzela
             if (towerScript != null)
+            {
+                towerScript.isGhost = true;
                 towerScript.enabled = false;
+            }
+                
 
             if (currentGhostTower.GetComponent<SpriteRenderer>() == null)
             {
@@ -76,9 +80,10 @@ public class SkryptDodania: MonoBehaviour
                     Tower towerScript = placedTower.GetComponent<Tower>();
                     if (towerScript != null)
                         towerScript.enabled = true;
+                        towerScript.isGhost = false;
 
-                    // I usuń wieżę widmo
-                    CleanupPlacement();
+                        // I usuń wieżę widmo
+                        CleanupPlacement();
                     Debug.Log("Tower placed successfully!");
                 }
                 else
@@ -109,33 +114,72 @@ public class SkryptDodania: MonoBehaviour
 
     private bool CheckIfPlacementIsValid(Vector3 position)
     {
-        // Physics2D.OverlapCircle sprawdza czy jakiekolwiek kolidery znajdują się w określonym promieniu od pozycji.
-        // Sprawdzamy tagi tego co się styka z wieżą widmo.
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, placementCheckRadius);
+        // BLOKADA UI
+        if (IsUIInPlacementRadius(position))
+            return false;
 
-        foreach (Collider2D collider in colliders)
+        // BLOKADA POZA KAMERĄ
+        if (!IsPositionInsideCamera(position))
+            return false;
+
+        // SPRAWDZANIE FIZYKI — KOLIZJE TOWER / PATH
+        Collider2D[] hits = Physics2D.OverlapCircleAll(position, placementCheckRadius);
+        foreach (Collider2D hit in hits)
         {
-            // Tylko po to by nie kolidować z samym sobą
-            if (collider.gameObject == currentGhostTower) 
-                continue;
+            if (hit.gameObject == currentGhostTower)
+                continue; // ignoruj własną wieżę
 
-            // Check 1: Tower Overlap
-            // Sprawdzamy czy nazwa obiektu zawiera nazwę prefaba wieży
-            if (collider.gameObject.name.Contains(towerPrefab.name))
-            {
-                return false; // Jeśli tak to blokuje
-            }
+            // Kolizja z inną wieżą
+            if (hit.gameObject.layer == LayerMask.NameToLayer("Tower"))
+                return false;
 
-            // Check 2: Pathpoint Overlap
-            // To samo ale sprawdzamy tag drogi
-            if (collider.gameObject.CompareTag("Pathpoint"))
-            {
-                return false; // Tutaj też blokuje
-            }
+            // Kolizja z drogą
+            if (hit.gameObject.layer == LayerMask.NameToLayer("Path"))
+                return false;
         }
 
-        // Jak przeszło przez ify to znaczy, że można postawić wieżę
         return true;
+    }
+
+    private bool IsUIInPlacementRadius(Vector3 position)
+    {
+        int points = 8; // liczba punktów w okręgu
+
+        for (int i = 0; i < points; i++)
+        {
+            float angle = i * Mathf.PI * 2 / points;
+            Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * placementCheckRadius;
+            Vector2 checkPos = Camera.main.WorldToScreenPoint(position + offset);
+
+            var eventData = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current);
+            eventData.position = checkPos;
+
+            var results = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
+            UnityEngine.EventSystems.EventSystem.current.RaycastAll(eventData, results);
+
+            if (results.Count > 0)
+                return true; // znalazło UI w promieniu
+        }
+
+        return false;
+    }
+
+    private bool IsPositionInsideCamera(Vector3 position)
+    {
+        int points = 8; // liczba punktów w okręgu
+
+        for (int i = 0; i < points; i++)
+        {
+            float angle = i * Mathf.PI * 2 / points;
+            Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * placementCheckRadius;
+            Vector3 checkPos = position + offset;
+            Vector3 viewportPos = Camera.main.WorldToViewportPoint(checkPos);
+
+            if (viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < 0 || viewportPos.y > 1)
+                return false; // punkt wychodzi poza ekran
+        }
+
+        return true; // wszystkie punkty mieszczą się w kamerze
     }
 
     private void SetGhostColor(Color color)

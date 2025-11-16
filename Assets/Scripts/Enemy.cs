@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
                     GameManager.Instance.LoseLife(playerDamage); 
                 }
                 //i tutaj tak jak wcześniej wróg znika z puli
-                gameObject.SetActive(false);
+                Destroy(gameObject);
             }
         }
 
