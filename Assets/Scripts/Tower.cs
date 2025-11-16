@@ -109,7 +109,8 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
+        GameObject projectileParent = GameObject.Find("Projectiles");
+        GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity, projectileParent != null ? projectileParent.transform : null);
 
         Projectile projectile = projectileGO.GetComponent<Projectile>();
         if (projectile != null)
