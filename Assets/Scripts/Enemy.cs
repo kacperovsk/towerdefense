@@ -7,9 +7,15 @@ public class Enemy : MonoBehaviour
     static float maxHealth = 10f;
     [SerializeField] private float health = maxHealth;
     [SerializeField] private Path currentPath;
+    [Header("Player Damage")]
+    [SerializeField] private int playerDamage = 1; //Ile obrażeń zada przeciwnik gdy dojdzie do końca. Ustawiam na 1 bo edytuje w prefabie anyway
     private Vector3 targetPosition;
     private int currentPosition;
     private bool facingRight = true;
+
+    //Wartości kasy dla wrogów, nie jestem pewien czy to potrzebne ale buja
+    [Header("Reward")]
+    [SerializeField] private int moneyValue = 10;
     void Flip(bool faceRight)
     {
         facingRight = faceRight;
@@ -26,6 +32,11 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        //Teraz przed usunięciem dodajemy kasę do gracza
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddMoney(moneyValue);
+        }
         Destroy(gameObject);
     }
 
@@ -72,15 +83,23 @@ public class Enemy : MonoBehaviour
                     Flip(false); //lewo
                 }
             }
+            //Z tego co wiem to jest ten skrypt usuwania wroga na końcu ścieżki
             else
             {
+                // więc jak dotrze do końca
+                if (GameManager.Instance != null)
+                {
+                    // To gracz traci HP
+                    GameManager.Instance.LoseLife(playerDamage); 
+                }
+                //i tutaj tak jak wcześniej wróg znika z puli
                 gameObject.SetActive(false);
             }
         }
 
     }
 
-    public float GetProgress() // nie mam pojecia co tu sie dzieje ale buja i dzia��
+    public float GetProgress() // nie mam pojecia co tu sie dzieje ale buja i dzia��
     {
         if (currentPath == null || currentPath.Waypoints == null || currentPath.Waypoints.Length < 2)
             return 0f;
@@ -94,10 +113,10 @@ public class Enemy : MonoBehaviour
         float segmentLength = Vector3.Distance(prevPos, nextPos);
         float distanceFromPrev = Vector3.Distance(transform.position, prevPos);
 
-        // ile procent trasy mi�dzy tymi waypointami wr�g pokona�
+        // ile procent trasy mi�dzy tymi waypointami wr�g pokona�
         float segmentProgress = (segmentLength > 0f) ? Mathf.Clamp01(distanceFromPrev / segmentLength) : 0f;
 
-        // pe�ny progres = numer poprzedniego waypointa + u�amek segmentu
+        // pe�ny progres = numer poprzedniego waypointa + u�amek segmentu
         float totalProgress = (prevIndex + segmentProgress) / (currentPath.Waypoints.Length - 1);
 
         return Mathf.Clamp01(totalProgress);

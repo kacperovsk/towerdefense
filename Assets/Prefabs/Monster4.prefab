@@ -48,6 +48,8 @@ MonoBehaviour:
   moveSpeed: 1
   health: 30
   currentPath: {fileID: 0}
+  playerDamage: 10
+  moneyValue: 20
 --- !u!212 &4941225622946099113
 SpriteRenderer:
   m_ObjectHideFlags: 0
