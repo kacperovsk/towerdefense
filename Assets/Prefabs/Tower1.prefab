@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2970915237052824612}
   - component: {fileID: 5389100548013037952}
   - component: {fileID: 3465177211175200618}
-  m_Layer: 0
-  m_Name: TowerPrefab 1
+  m_Layer: 6
+  m_Name: Tower1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,9 +105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b9c2e7de68adf42a5ac8ec5bfde959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
+  towerIcon: {fileID: -3455278667648784488, guid: bdccc3846be5f194db6cd12cd986d964, type: 3}
+  towerName: Archer Tower
   range: 2
   fireRate: 1
-  projectilePooler: {fileID: 0}
+  damage: 4
+  projectilePrefab: {fileID: 1483898852620040137, guid: e57d0d65bfa28c8418506222b00eeea9, type: 3}
   shootPoint: {fileID: 5751366994624188520}
 --- !u!58 &3465177211175200618
 CircleCollider2D:
@@ -144,7 +147,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.1
+  m_Radius: 0.18
 --- !u!1 &8565588886787649783
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5751366994624188520}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

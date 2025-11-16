@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PauseManager : MonoBehaviour
 {
     public bool isPaused = false;
-    public TextMeshProUGUI buttonText;
     public GameObject pauseMenu;
 
     void Update()
@@ -23,7 +22,6 @@ public class PauseManager : MonoBehaviour
             // Wznawianie
             Time.timeScale = 1f;
             isPaused = false;
-            buttonText.text = "||";
             pauseMenu.SetActive(false); // ukryj menu
         }
         else
@@ -31,7 +29,6 @@ public class PauseManager : MonoBehaviour
             // Pauza
             Time.timeScale = 0f;
             isPaused = true;
-            buttonText.text = "||";
             pauseMenu.SetActive(true); // poka¿ menu
         }
     }

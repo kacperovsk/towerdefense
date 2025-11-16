@@ -1,28 +1,66 @@
 using System;
 using UnityEngine;
 
+public struct TowerStats
+{
+    public Sprite towerIcon;
+    public string towerName;
+    public float damage;
+    public float fireRate;
+    public float range;
+
+    public TowerStats(Sprite icon, string name, float dmg, float rate, float rng)
+    {
+        towerIcon = icon;
+        towerName = name;
+        damage = dmg;
+        fireRate = rate;
+        range = rng;
+    }
+}
+
 public class Tower : MonoBehaviour
 {
+    [SerializeField] public Sprite towerIcon;
+    [SerializeField] public string towerName;
+
     [SerializeField] private float range = 2f;
     public float fireRate = 1f;
-    [SerializeField] private ObjectPooler projectilePooler;
+    public float damage = 4f;
+    public bool isGhost = false;
+
+    [SerializeField] private GameObject projectilePrefab;
     public Transform shootPoint;
+
+    private LineRenderer rangeCircle;
+    private bool showRange;
 
     private float fireCountdown = 0f;
     private Enemy targetEnemy;
-    // Update is called once per frame
     private void Start()
     {
-        if (projectilePooler == null)
+        if (rangeCircle == null)
         {
-            GameObject poolObj = GameObject.FindGameObjectWithTag("ProjectilePool");
-            if (poolObj != null)
-                projectilePooler = poolObj.GetComponent<ObjectPooler>();
+            rangeCircle = gameObject.AddComponent<LineRenderer>();
+            rangeCircle.loop = true;
+            rangeCircle.positionCount = 50;
+            rangeCircle.material = new Material(Shader.Find("Sprites/Default"));
+            rangeCircle.startWidth = 0.02f;
+            rangeCircle.endWidth = 0.02f;
+            rangeCircle.startColor = Color.grey;
+            rangeCircle.endColor = Color.grey;
+            rangeCircle.sortingLayerName = "Foreground";
+            rangeCircle.sortingOrder = 10;
+            rangeCircle.enabled = false; // na start niewidoczny
         }
+
     }
     void Update()
     {
         UpdateTarget();
+
+        if (showRange)
+            DrawCircle();
 
         if (targetEnemy == null )
         {
@@ -71,21 +109,42 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        GameObject projectileGO = projectilePooler.getPooledObject();
-        projectileGO.transform.position = shootPoint.position;
-        projectileGO.transform.rotation = Quaternion.identity;
-        projectileGO.SetActive(true);
+        GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
 
         Projectile projectile = projectileGO.GetComponent<Projectile>();
         if (projectile != null)
         {
-            projectile.SetTarget(targetEnemy);
+            // Pass tower's damage to the projectile
+            projectile.SetTarget(targetEnemy, damage);
         }
     }
 
-    void OnDrawGizmosSelected()
+    void DrawCircle()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, range);
+        for (int i = 0; i < rangeCircle.positionCount; i++)
+        {
+            float angle = 2 * Mathf.PI * i / rangeCircle.positionCount;
+            Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * range;
+            rangeCircle.SetPosition(i, transform.position + pos);
+        }
+    }
+
+    public TowerStats GetStats()
+    {
+        return new TowerStats(towerIcon, towerName, damage, fireRate, range);
+    }
+
+    public void ShowRange()
+    {
+        showRange = true;
+        if (rangeCircle != null)
+            rangeCircle.enabled = true;
+    }
+
+    public void HideRange()
+    {
+        showRange = false;
+        if (rangeCircle != null)
+            rangeCircle.enabled = false;
     }
 }

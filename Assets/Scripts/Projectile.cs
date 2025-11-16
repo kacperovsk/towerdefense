@@ -4,13 +4,16 @@ public class Projectile : MonoBehaviour
 {
     private Enemy target;
     public float speed = 4f;
-    public float damage = 4f;
+    private float damage;
     private bool hasHit = false; // prevents multiple hits
 
-    public void SetTarget(Enemy _target)
+    
+    public void SetTarget(Enemy _target, float dmg)
     {
         target = _target;
+        damage = dmg;
     }
+
 
     void OnEnable()
     {
@@ -21,7 +24,7 @@ public class Projectile : MonoBehaviour
     {
         if (target == null || !target.gameObject.activeInHierarchy)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
             return;
         }
 
@@ -59,6 +62,6 @@ public class Projectile : MonoBehaviour
                 enemy.TakeDamage(damage);
         }
 
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
