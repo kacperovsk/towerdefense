@@ -1,6 +1,7 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //Jak coś ten plik jest po to by łatwiej zarządzać elementami gry takimi jak pieniądze itp. które nie pasują do innych skryptów i są bardziej globalne
@@ -148,5 +149,11 @@ public class GameManager : MonoBehaviour
             isPaused = true;
             pauseMenu.SetActive(true); // pokaż menu
         }
+    }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);   // podobno resetuje scene przy okazji zmienienia na inna.
     }
 }
