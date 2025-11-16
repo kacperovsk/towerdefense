@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -2}
-  m_LocalScale: {x: 2.3, y: 2.3, z: 1.15}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5751366994624188520}
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3455278667648784488, guid: bdccc3846be5f194db6cd12cd986d964, type: 3}
+  m_Sprite: {fileID: 2737714728287120070, guid: 0aafba2b9023fb24182856dd3a6228ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,11 +105,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b9c2e7de68adf42a5ac8ec5bfde959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
-  towerIcon: {fileID: -3455278667648784488, guid: bdccc3846be5f194db6cd12cd986d964, type: 3}
+  towerIcon: {fileID: 2737714728287120070, guid: 0aafba2b9023fb24182856dd3a6228ad, type: 3}
   towerName: Archer Tower
   range: 2
   fireRate: 1
   damage: 4
+  isGhost: 0
   projectilePrefab: {fileID: 1483898852620040137, guid: e57d0d65bfa28c8418506222b00eeea9, type: 3}
   shootPoint: {fileID: 5751366994624188520}
 --- !u!58 &3465177211175200618
@@ -147,7 +148,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.18
+  m_Radius: 0.7
 --- !u!1 &8565588886787649783
 GameObject:
   m_ObjectHideFlags: 0

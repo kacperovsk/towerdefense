@@ -76,7 +76,8 @@ public class SkryptDodania: MonoBehaviour
                 {
                     if (GameManager.Instance.SpendMoney(towerCost)){
                     // Jak tak to postaw wieżę na stałe
-                    GameObject placedTower = Instantiate(towerPrefab, mouseWorldPosition, Quaternion.identity); // Wieża dopiero po postawieniu strzela
+                    GameObject towerParent = GameObject.Find("Towers");
+                    GameObject placedTower = Instantiate(towerPrefab, mouseWorldPosition, Quaternion.identity, towerParent != null ? towerParent.transform : null); // Wieża dopiero po postawieniu strzela
                     Tower towerScript = placedTower.GetComponent<Tower>();
                     if (towerScript != null)
                         towerScript.enabled = true;
