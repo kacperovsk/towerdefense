@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class SkryptDodania: MonoBehaviour
 {
     public GameObject towerPrefab; 
+    [Header("Tower Cost")]
+    public int towerCost = 50;
     public float placementCheckRadius = 1.0f;
     public Color validColor = new Color(0.2f, 1f, 0.2f, 0.5f); // Green, semi-transparent
     public Color invalidColor = new Color(1f, 0.2f, 0.2f, 0.5f); // Red, semi-transparent
@@ -15,6 +17,11 @@ public class SkryptDodania: MonoBehaviour
         if (isPlacing)
         {
             Debug.Log("Already in placement mode!");
+            return;
+        }
+        if (GameManager.Instance != null && GameManager.Instance.GetCurrentMoney() < towerCost)
+        {
+            Debug.Log("Nie masz wystarczająco pieniędzy, aby rozpocząć stawianie!");
             return;
         }
 
@@ -48,7 +55,12 @@ public class SkryptDodania: MonoBehaviour
             currentGhostTower.transform.position = mouseWorldPosition;
 
             // 1. --- VALIDATION CHECK ---
-            isValidPlacement = CheckIfPlacementIsValid(mouseWorldPosition);
+            //Czy miejsce jest poprawne?
+            bool isPositionValid = CheckIfPlacementIsValid(mouseWorldPosition);
+            // Czy dalej kasa się zgadza?
+            bool hasEnoughMoney = GameManager.Instance != null && GameManager.Instance.GetCurrentMoney() >= towerCost;
+            // 2 razy tak? Przechodzisz dalej
+            isValidPlacement = isPositionValid && hasEnoughMoney;
 
             // 2. --- VISUAL FEEDBACK ---
             SetGhostColor(isValidPlacement ? validColor : invalidColor);
@@ -58,6 +70,7 @@ public class SkryptDodania: MonoBehaviour
                 // Sprawdź czy można tu postawić wieżę
                 if (isValidPlacement)
                 {
+                    if (GameManager.Instance.SpendMoney(towerCost)){
                     // Jak tak to postaw wieżę na stałe
                     GameObject placedTower = Instantiate(towerPrefab, mouseWorldPosition, Quaternion.identity); // Wieża dopiero po postawieniu strzela
                     Tower towerScript = placedTower.GetComponent<Tower>();
@@ -69,9 +82,26 @@ public class SkryptDodania: MonoBehaviour
                     Debug.Log("Tower placed successfully!");
                 }
                 else
+                    {
+                         // Ten fragment raczej nie zostanie nigdy wykorzystany, ale dodaje na wszelki wypadek gdybyśmy coś oprócz wież robili z kasą
+                         // Bo gdyby jednocześnie gracz wydał kasę gdzie indziej to by się nie zgadzało
+                         Debug.Log("Nie można postawić wieży: Brak środków (problem z walidacją)."); 
+                         CleanupPlacement();
+                    }
+                }
+                //Obsługa gdy nie można postawić
+                else
                 {
-                    // Jak nie to daj znać, że nie można tu postawić wieży bo koliduje z inną lub Pathpointem
-                    Debug.Log("Cannot place here: Overlapping another tower or a Pathpoint.");
+                    //Gdy nie ma kasy
+                    if (!hasEnoughMoney)
+                        {
+                            Debug.Log("Nie można postawić: Za mało pieniędzy!");
+                        }
+                    else
+                        {
+                            // Jak nie to daj znać, że nie można tu postawić wieży bo koliduje z inną lub Pathpointem
+                            Debug.Log("Cannot place here: Overlapping another tower or a Pathpoint.");
+                        }
                 }
             }
         }

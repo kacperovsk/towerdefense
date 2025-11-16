@@ -106,3 +106,5 @@ MonoBehaviour:
   moveSpeed: 1
   health: 10
   currentPath: {fileID: 0}
+  playerDamage: 5
+  moneyValue: 5
