@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   moveSpeed: 2
-  health: 15
+  health: 40
   currentPath: {fileID: 0}
   playerDamage: 10
   moneyValue: 25
