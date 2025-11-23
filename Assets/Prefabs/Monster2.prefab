@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739228f38cd2c6545a65322203271cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveSpeed: 1
-  health: 15
+  moveSpeed: 1.25
+  health: 20
   currentPath: {fileID: 0}
   playerDamage: 5
   moneyValue: 10
