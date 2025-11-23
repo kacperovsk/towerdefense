@@ -11,6 +11,9 @@ public class StatsWindow : MonoBehaviour
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI attackspeedText;
     public TextMeshProUGUI radiusText;
+    public TextMeshProUGUI costText;
+    public Image costIcon;
+    public bool showCost = false;
 
     private void Awake()
     {
@@ -37,5 +40,16 @@ public class StatsWindow : MonoBehaviour
         damageText.text = $"Damage: {stats.damage}";
         attackspeedText.text = $"AS: {stats.fireRate}";
         radiusText.text = $"Range: {stats.range}";
+        if (showCost)
+        {
+            costText.text = stats.cost.ToString();
+            costText.gameObject.SetActive(true);
+            costIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            costText.gameObject.SetActive(false);
+            costIcon.gameObject.SetActive(false);
+        }
     }
 }
