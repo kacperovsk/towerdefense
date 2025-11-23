@@ -5,15 +5,16 @@ public class SkryptDodania: MonoBehaviour
 {
     public GameObject towerPrefab; 
     [Header("Tower Cost")]
-    public int towerCost = 50;
     public float placementCheckRadius = 0.3f;
     public Color validColor = new Color(0.2f, 1f, 0.2f, 0.5f); // Green, semi-transparent
     public Color invalidColor = new Color(1f, 0.2f, 0.2f, 0.5f); // Red, semi-transparent
     private GameObject currentGhostTower;
     private bool isPlacing = false;
     private bool isValidPlacement = false;
+    
     public void OnDodajButtonClick()
     {
+        int towerCost = towerPrefab.GetComponent<Tower>().cost;
         if (isPlacing)
         {
             Debug.Log("Already in placement mode!");
@@ -32,7 +33,9 @@ public class SkryptDodania: MonoBehaviour
             if (towerScript != null)
             {
                 towerScript.isGhost = true;
-                towerScript.enabled = false;
+
+                //Pokazywanie range przy stawianiu
+                towerScript.ShowRange();
             }
                 
 
@@ -50,8 +53,12 @@ public class SkryptDodania: MonoBehaviour
 
     void Update()
     {
+        
         if (isPlacing)
         {
+            // Ustawienie kosztu wieży z prefaba.
+            int towerCost = towerPrefab.GetComponent<Tower>().cost;
+
             // Get Mouse Position and set Z to 0
             Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
             Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
@@ -69,6 +76,13 @@ public class SkryptDodania: MonoBehaviour
             // 2. --- VISUAL FEEDBACK ---
             SetGhostColor(isValidPlacement ? validColor : invalidColor);
 
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                Debug.Log("Placement canceled by right click");
+                CleanupPlacement(); // już masz funkcję, która usuwa ghost i resetuje isPlacing
+                return;
+            }
+
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 // Sprawdź czy można tu postawić wieżę
@@ -80,8 +94,8 @@ public class SkryptDodania: MonoBehaviour
                     GameObject placedTower = Instantiate(towerPrefab, mouseWorldPosition, Quaternion.identity, towerParent != null ? towerParent.transform : null); // Wieża dopiero po postawieniu strzela
                     Tower towerScript = placedTower.GetComponent<Tower>();
                     if (towerScript != null)
-                        towerScript.enabled = true;
                         towerScript.isGhost = false;
+                        towerScript.HideRange();
 
                         // I usuń wieżę widmo
                         CleanupPlacement();

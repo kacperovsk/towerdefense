@@ -68,5 +68,17 @@ public class TowerClickHandler : MonoBehaviour
                 }
             }
         }
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            if (activeTower != null)
+            {
+                activeTower.HideRange();
+                activeTower = null;
+
+                // brak aktywnej wie¿y -> ukryj panel
+                if (StatsWindow.Instance != null)
+                    StatsWindow.Instance.gameObject.SetActive(false);
+            }
+        }
     }
 }

@@ -8,14 +8,15 @@ public struct TowerStats
     public float damage;
     public float fireRate;
     public float range;
-
-    public TowerStats(Sprite icon, string name, float dmg, float rate, float rng)
+    public float cost;
+    public TowerStats(Sprite icon, string name, float dmg, float rate, float rng, float cost_)
     {
         towerIcon = icon;
         towerName = name;
         damage = dmg;
         fireRate = rate;
         range = rng;
+        cost = cost_;
     }
 }
 
@@ -24,10 +25,15 @@ public class Tower : MonoBehaviour
     [SerializeField] public Sprite towerIcon;
     [SerializeField] public string towerName;
 
+    // koszt przesuniety z skryptu dodania.
+    [SerializeField] public int cost;
+
     [SerializeField] private float range = 2f;
     public float fireRate = 1f;
     public float damage = 4f;
-    public bool isGhost = false;
+
+    // Zmienione na hideininspector zeby nikt przez przypadek nie zmienil :skull:
+    [HideInInspector] public bool isGhost = false;
 
     [SerializeField] private GameObject projectilePrefab;
     public Transform shootPoint;
@@ -37,7 +43,7 @@ public class Tower : MonoBehaviour
 
     private float fireCountdown = 0f;
     private Enemy targetEnemy;
-    private void Start()
+    private void Awake()
     {
         if (rangeCircle == null)
         {
@@ -49,10 +55,12 @@ public class Tower : MonoBehaviour
             rangeCircle.endWidth = 0.02f;
             rangeCircle.startColor = Color.grey;
             rangeCircle.endColor = Color.grey;
-            rangeCircle.sortingLayerName = "Foreground";
-            rangeCircle.sortingOrder = 10;
             rangeCircle.enabled = false; // na start niewidoczny
         }
+    }
+
+    private void Start()
+    {
 
     }
     void Update()
@@ -61,6 +69,10 @@ public class Tower : MonoBehaviour
 
         if (showRange)
             DrawCircle();
+
+        // Nie strzela jak jest duchem (przeniesione z skryptu dodania)
+        if (isGhost)
+            return;
 
         if (targetEnemy == null )
         {
@@ -132,7 +144,7 @@ public class Tower : MonoBehaviour
 
     public TowerStats GetStats()
     {
-        return new TowerStats(towerIcon, towerName, damage, fireRate, range);
+        return new TowerStats(towerIcon, towerName, damage, fireRate, range, cost);
     }
 
     public void ShowRange()

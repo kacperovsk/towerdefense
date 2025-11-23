@@ -14,6 +14,7 @@ public class TowerButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (towerPrefab != null && StatsWindow.Instance != null)
         {
             StatsWindow.Instance.gameObject.SetActive(true);
+            StatsWindow.Instance.showCost = true;
             StatsWindow.Instance.UpdateStats(towerPrefab.GetStats());
         }
     }
@@ -27,6 +28,7 @@ public class TowerButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (StatsWindow.Instance != null)
         {
             StatsWindow.Instance.gameObject.SetActive(false);
+            StatsWindow.Instance.showCost = false;
         }
     }
 }
