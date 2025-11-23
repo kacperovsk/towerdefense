@@ -56,6 +56,7 @@ public class Tower : MonoBehaviour
             rangeCircle.startColor = Color.grey;
             rangeCircle.endColor = Color.grey;
             rangeCircle.enabled = false; // na start niewidoczny
+            rangeCircle.sortingOrder = 2; // UI ma 1, mapa 0, wieze 2
         }
     }
 
