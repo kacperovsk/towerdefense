@@ -867,6 +867,9 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 3450313858015911794, guid: 7fb9cdba372ca3b42a96cc04826fa2e8, type: 3}
       count: 8
       spawnInterval: 1
+    - enemyPrefab: {fileID: 7427677393984152541, guid: 9333f7bf381b80d44b5dbee6f7eadb57, type: 3}
+      count: 1
+      spawnInterval: 0
   - enemyGroups:
     - enemyPrefab: {fileID: 3450313858015911794, guid: 7fb9cdba372ca3b42a96cc04826fa2e8, type: 3}
       count: 14
@@ -2314,7 +2317,6 @@ GameObject:
   - component: {fileID: 640266881}
   - component: {fileID: 640266880}
   - component: {fileID: 640266882}
-  - component: {fileID: 640266883}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2369,18 +2371,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerClickHandler
   activeTower: {fileID: 0}
---- !u!114 &640266883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640266879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0097f2dde971f241a5eaf79e357acca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
 --- !u!1001 &649203691
 PrefabInstance:
   m_ObjectHideFlags: 0
