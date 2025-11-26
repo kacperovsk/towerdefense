@@ -3,19 +3,35 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 1f;
-    static float maxHealth = 10f;
-    [SerializeField] private float health = maxHealth;
+    private float moveSpeedMultiplier = 1f;
+    [SerializeField] private float currentMoveSpeed;
     [SerializeField] private Path currentPath;
-    [Header("Player Damage")]
-    [SerializeField] private int playerDamage = 1; //Ile obrażeń zada przeciwnik gdy dojdzie do końca. Ustawiam na 1 bo edytuje w prefabie anyway
     private Vector3 targetPosition;
     private int currentPosition;
     private bool facingRight = true;
 
+    [Header("Health Settings")]
+    [SerializeField] private float baseMaxHealth = 10f;
+    private float maxHpMultiplier = 1f;
+    private float currentMaxHealth;
+    [SerializeField] private float health;
+
+    [Header("Health Bar")]
+    [SerializeField] private Transform healthBar;
+    private Vector3 _healthBarOriginalScale;
+
+    [Header("Player Damage")]
+    private float damageMultiplier = 1f;
+    [SerializeField] private int playerDamage = 1; //Ile obrażeń zada przeciwnik gdy dojdzie do końca. Ustawiam na 1 bo edytuje w prefabie anyway
+    [SerializeField] private int currentPlayerDamage;
+
     //Wartości kasy dla wrogów, nie jestem pewien czy to potrzebne ale buja
     [Header("Reward")]
     [SerializeField] private int moneyValue = 10;
+
+
     void Flip(bool faceRight)
     {
         facingRight = faceRight;
@@ -27,11 +43,18 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
+        UpdateHealhBar();
         if (health <= 0f) Die();
     }
 
     private void Die()
     {
+        TrojanHorse trojan = GetComponent<TrojanHorse>();
+        if (trojan != null)
+        {
+            trojan.SpawnEnemies();
+        }
+
         //Teraz przed usunięciem dodajemy kasę do gracza
         if (GameManager.Instance != null)
         {
@@ -43,25 +66,51 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         currentPath = GameObject.Find("Path").GetComponent<Path>();
+        _healthBarOriginalScale = healthBar.localScale;
     }
-    private void OnEnable()
+    private void Start()
     {
-        // USTAWIENIE WAYPOINTA NA SPAWN
-        currentPosition = 0; 
-        // USTAWIANIE HP NA MAX NA SPAWN
-        health = maxHealth; 
-        // OBRACANIE W PRAWO NA SPAWN
-        facingRight = true;
-        Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x);
-        transform.localScale = scale; 
+        damageMultiplier = 1f;
+        currentPlayerDamage = playerDamage;
 
-        targetPosition = currentPath.GetPosition(currentPosition);
+        if (forcedSpawn)
+        {
+            transform.position = forcedSpawnPosition;
+
+            if (forcedWaypoint >= 0)
+                currentPosition = forcedWaypoint;
+            else
+                currentPosition = 0;
+
+            targetPosition = currentPath.GetPosition(currentPosition);
+
+            forcedSpawn = false;
+            forcedWaypoint = -1;
+        }
+        else
+        {
+            currentPosition = 0;
+            targetPosition = currentPath.GetPosition(currentPosition);
+        }
+
+        maxHpMultiplier = 1f;
+        currentMaxHealth = baseMaxHealth;
+        health = currentMaxHealth;
+        UpdateHealhBar();
     }
+
+
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        currentMoveSpeed = moveSpeed * moveSpeedMultiplier;
+
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetPosition,
+            currentMoveSpeed * Time.deltaTime
+            );
+
 
         float relativeDistance = (transform.position - targetPosition).magnitude;
 
@@ -90,7 +139,7 @@ public class Enemy : MonoBehaviour
                 if (GameManager.Instance != null)
                 {
                     // To gracz traci HP
-                    GameManager.Instance.LoseLife(playerDamage); 
+                    GameManager.Instance.LoseLife(currentPlayerDamage);
                 }
                 //i tutaj tak jak wcześniej wróg znika z puli
                 Destroy(gameObject);
@@ -121,4 +170,52 @@ public class Enemy : MonoBehaviour
 
         return Mathf.Clamp01(totalProgress);
     }
+
+    public void ModifyMaxHealthMultiplier(float mult)
+    {
+        maxHpMultiplier *= mult;
+
+        float oldMax = currentMaxHealth;
+        currentMaxHealth = baseMaxHealth * maxHpMultiplier;
+        health = health / oldMax * currentMaxHealth;
+        //float newMax = maxHealth * maxHpMultiplier;
+
+        // zdrowie nie może przekraczać nowego maksymalnego
+        health = Mathf.Min(health, currentMaxHealth);
+
+        UpdateHealhBar();
+    }
+    public float GetMaxHealth() => currentMaxHealth;
+    public float GetHealth() => health;
+    public int GetCurrentWaypoint() => currentPosition;
+    private void UpdateHealhBar()
+    {
+        float healthPercent = health / currentMaxHealth;
+
+        Vector3 scale = _healthBarOriginalScale;
+        scale.x = _healthBarOriginalScale.x * healthPercent;
+        healthBar.localScale = scale;
+    }
+    public void ModifySpeedMultiplier(float mult)
+    {
+        moveSpeedMultiplier *= mult;
+        currentMoveSpeed = moveSpeed * moveSpeedMultiplier;
+    }
+    public void ModifyDamageMultiplier(float mult)
+    {
+        damageMultiplier *= mult;
+        currentPlayerDamage = Mathf.RoundToInt(playerDamage * damageMultiplier);
+    }
+
+    private bool forcedSpawn = false;
+    private Vector3 forcedSpawnPosition;
+
+    private int forcedWaypoint = -1;
+    public void SetStartPosition(Vector3 pos, int waypoint)
+    {
+        forcedSpawn = true;
+        forcedSpawnPosition = pos;
+        forcedWaypoint = waypoint;
+    }
+
 }
