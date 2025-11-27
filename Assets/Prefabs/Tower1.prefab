@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: 2737714728287120070, guid: 0aafba2b9023fb24182856dd3a6228ad, type: 3}
   towerName: Archer Tower
-  cost: 50
+  cost: 75
   range: 2
   fireRate: 1
   damage: 4
