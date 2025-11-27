@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 2512583383796237889}
   - component: {fileID: 7861537725862150800}
   - component: {fileID: 3526343310393046531}
+  - component: {fileID: -9069716868897076161}
   m_Layer: 0
   m_Name: Monster8
   m_TagString: Enemy
@@ -140,8 +141,8 @@ MonoBehaviour:
   moveSpeed: 1.5
   currentMoveSpeed: 0
   currentPath: {fileID: 0}
-  baseMaxHealth: 80
-  health: 80
+  baseMaxHealth: 1
+  health: 1
   healthBar: {fileID: 7745680578376526097}
   playerDamage: 15
   currentPlayerDamage: 0
@@ -250,3 +251,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.53, y: 0.59}
   m_EdgeRadius: 0
+--- !u!114 &-9069716868897076161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786978946755131853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb08fc621ee07641ab7ab5e7b4c4118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrojanHorse
+  enemyPrefab: {fileID: 7773017103562806699, guid: f7427ec9786a2964298f7b6fad3bc3ae, type: 3}
+  enemiesInside: 1
+  spawnSpread: 0.3
