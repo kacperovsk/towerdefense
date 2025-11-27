@@ -322,15 +322,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739228f38cd2c6545a65322203271cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveSpeed: 1
+  moveSpeed: 0.5
   currentMoveSpeed: 0
   currentPath: {fileID: 0}
-  baseMaxHealth: 10
-  health: 10
+  baseMaxHealth: 250
+  health: 250
   healthBar: {fileID: 4178210044234661290}
   playerDamage: 1
   currentPlayerDamage: 0
-  moneyValue: 10
+  moneyValue: 50
 --- !u!212 &2247034464999990732
 SpriteRenderer:
   m_ObjectHideFlags: 0

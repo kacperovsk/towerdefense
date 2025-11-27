@@ -204,7 +204,7 @@ MonoBehaviour:
   healthBar: {fileID: 2239542832668969768}
   playerDamage: 5
   currentPlayerDamage: 0
-  moneyValue: 5
+  moneyValue: 3
 --- !u!50 &-1493451585095158151
 Rigidbody2D:
   serializedVersion: 5

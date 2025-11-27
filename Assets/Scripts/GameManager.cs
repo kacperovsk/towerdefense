@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     // Początkowa ilość pieniędzy gracza
-    [SerializeField] private int currentMoney = 100;
+    [SerializeField] private int currentMoney = 250;
     public TextMeshProUGUI LicznikPieniedzy;
     // Początkowa ilość życia gracza
     [Header("Life")]
@@ -39,11 +39,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Start: currentMoney = " + currentMoney);
         //Przy starcie gry:
         //Ustawia zdrowie na domyślne
         UpdateLifeUI();
         //Ustawia kase na domyślną
         UpdateMoneyUI();
+        
     }
 
     // Dodawanie pieniędzy przy śmierci przeciwnika

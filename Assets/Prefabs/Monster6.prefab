@@ -141,12 +141,12 @@ MonoBehaviour:
   moveSpeed: 2
   currentMoveSpeed: 0
   currentPath: {fileID: 0}
-  baseMaxHealth: 1
-  health: 1
+  baseMaxHealth: 20
+  health: 20
   healthBar: {fileID: 8379252001439068255}
   playerDamage: 10
   currentPlayerDamage: 0
-  moneyValue: 25
+  moneyValue: 18
 --- !u!212 &-9178404209747810400
 SpriteRenderer:
   m_ObjectHideFlags: 0
