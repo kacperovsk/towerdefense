@@ -218,4 +218,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrojanHorse
   enemyPrefab: {fileID: 1505516397214031994, guid: b96b14eaf3b091c48b249b03a8412540, type: 3}
   enemiesInside: 5
-  spawnSpread: 0.6
+  spawnSpread: 1
