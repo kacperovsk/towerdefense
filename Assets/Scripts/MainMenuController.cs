@@ -7,7 +7,7 @@ public class MainMenuController : MonoBehaviour
     public void StartGame()
     {
         // Tymczasowe, potem do zastapienia jakims wyborem map.
-        SceneManager.LoadScene("GameMap1");
+        SceneManager.LoadScene("LevelSelector");
     }
 
     public void QuitGame()

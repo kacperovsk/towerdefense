@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour
     public void GoToMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);   // podobno resetuje scene przy okazji zmienienia na inna.
+        //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);   // podobno resetuje scene przy okazji zmienienia na inna.
+        SceneManager.LoadScene("MainMenu");   // Wylaczone do testow.
     }
 }
