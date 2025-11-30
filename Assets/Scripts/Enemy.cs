@@ -32,6 +32,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int moneyValue = 10;
 
 
+    public enum AuraStat
+    {
+        MaxHealth,
+        MoveSpeed,
+        Damage
+    }
     void Flip(bool faceRight)
     {
         facingRight = faceRight;
@@ -42,6 +48,15 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        // szansa na unik
+        if (TryGetComponent<Special5>(out Special5 s5))
+        {
+            if (s5.TryDodge())
+            {
+                // unik
+                return;
+            }
+        }
         health -= amount;
         UpdateHealhBar();
         if (health <= 0f) Die();
@@ -118,7 +133,7 @@ public class Enemy : MonoBehaviour
         if (relativeDistance < 0.05f)
         {
 
-            if(currentPosition < currentPath.Waypoints.Length-1)
+            if (currentPosition < currentPath.Waypoints.Length - 1)
             {
                 currentPosition++;
                 targetPosition = currentPath.GetPosition(currentPosition);
@@ -136,7 +151,11 @@ public class Enemy : MonoBehaviour
             else
             {
                 // więc jak dotrze do końca
-                if (GameManager.Instance != null)
+                if (TryGetComponent<Special5>(out Special5 s5))
+                {
+                    s5.StealMoney();
+                }
+                else if (GameManager.Instance != null)
                 {
                     // To gracz traci HP
                     GameManager.Instance.LoseLife(currentPlayerDamage);
@@ -218,4 +237,39 @@ public class Enemy : MonoBehaviour
         forcedWaypoint = waypoint;
     }
 
+    public void ApplyAuraEffect(AuraStat stat, float mult)
+    {
+        switch (stat)
+        {
+            case AuraStat.MaxHealth:
+                ModifyMaxHealthMultiplier(mult);
+                break;
+
+            case AuraStat.MoveSpeed:
+                ModifySpeedMultiplier(mult);
+                break;
+
+            case AuraStat.Damage:
+                ModifyDamageMultiplier(mult);
+                break;
+        }
+    }
+
+    public void RemoveAuraEffect(AuraStat stat, float mult)
+    {
+        switch (stat)
+        {
+            case AuraStat.MaxHealth:
+                ModifyMaxHealthMultiplier(1f / mult);
+                break;
+
+            case AuraStat.MoveSpeed:
+                ModifySpeedMultiplier(1f / mult);
+                break;
+
+            case AuraStat.Damage:
+                ModifyDamageMultiplier(1f / mult);
+                break;
+        }
+    }
 }

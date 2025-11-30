@@ -56,15 +56,13 @@ public class GameManager : MonoBehaviour
     {
         if (amount < 0) return false;
 
-        if (currentMoney >= amount)
-        {
-            currentMoney -= amount;
-            UpdateMoneyUI();
-            return true;
-        }
+        // Jeśli gracz ma mniej niż amount to zabieramy wszystko
+        int moneyTaken = Mathf.Min(currentMoney, amount);
 
-        Debug.Log("GameManager: Brak środków na koncie!");
-        return false;
+        currentMoney -= moneyTaken;
+        UpdateMoneyUI();
+
+        return moneyTaken > 0; // zwraca true jeśli cokolwiek zabrał
     }
 
     // Do wywołania w innych skryptach gdy jest to potrzebne

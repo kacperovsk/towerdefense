@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1571058680718166980}
   - component: {fileID: 7851879404370672281}
-  - component: {fileID: 4153775970520565657}
   - component: {fileID: 6079470718747929459}
   - component: {fileID: 374513145333176722}
   - component: {fileID: 5213309752128396}
+  - component: {fileID: 3073875077000714131}
   m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
@@ -94,20 +94,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4153775970520565657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1893184113166115394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876a552c01491bf4daa1f83dc22ddd91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MageAura
-  radius: 0.5
-  maxHpMultiplier: 1.5
 --- !u!58 &6079470718747929459
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -185,6 +171,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AuraVisualPulse
   pulseSpeed: 2
   pulseStrength: 0.07
+--- !u!114 &3073875077000714131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893184113166115394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019da98a67da8204ea42ffcf3516ab20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AuraZone
+  radius: 0.5
+  affectMaxHealth: 1
+  maxHealthMultiplier: 1.5
+  affectMoveSpeed: 0
+  moveSpeedMultiplier: 1.2
+  affectDamage: 0
+  damageMultiplier: 1.2
 --- !u!1 &3895579659548317979
 GameObject:
   m_ObjectHideFlags: 0
