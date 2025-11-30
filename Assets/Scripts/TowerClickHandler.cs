@@ -5,9 +5,18 @@ using UnityEngine.EventSystems;
 public class TowerClickHandler : MonoBehaviour
 {
     public Tower activeTower; // aktualnie zaznaczona wie¿a
+    public static TowerClickHandler Instance;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Update()
     {
+        if (GameManager.Instance.isPlacing)
+            return;
+
+
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -30,7 +39,6 @@ public class TowerClickHandler : MonoBehaviour
                     clickedTower.justPlaced = false;
                     return;
                 }
-                    
 
                     // jeœli inna wie¿a by³a aktywna, ukryj jej zasiêg
                 if (activeTower != null && activeTower != clickedTower)

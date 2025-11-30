@@ -7,8 +7,6 @@ public class Karczma : Tower
     public float buffRadius = 3f;       
     public float buffMultiplier = 1.1f; // 1.1 = +10% bazowej wartości
 
-    private bool justPlaced = true;
-
     [HideInInspector] public Dictionary<Tower, float> towerBuffs = new Dictionary<Tower, float>();
 
     private void UpdateBuffs()
