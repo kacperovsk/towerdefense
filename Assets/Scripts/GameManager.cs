@@ -39,13 +39,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Start: currentMoney = " + currentMoney);
-        //Przy starcie gry:
-        //Ustawia zdrowie na domyślne
         UpdateLifeUI();
-        //Ustawia kase na domyślną
         UpdateMoneyUI();
-        
     }
 
     // Dodawanie pieniędzy przy śmierci przeciwnika
@@ -100,7 +95,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // NOWE: Do pokazania stanu żyć w UI
+    // Do pokazania stanu żyć w UI
     private void UpdateLifeUI()
     {
         if (LicznikŻycia != null)

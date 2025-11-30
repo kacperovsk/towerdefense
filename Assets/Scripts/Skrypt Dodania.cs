@@ -17,8 +17,7 @@ public class SkryptDodania: MonoBehaviour
         int towerCost = towerPrefab.GetComponent<Tower>().cost;
         if (isPlacing)
         {
-            Debug.Log("Already in placement mode!");
-            return;
+            CleanupPlacement();
         }
         if (GameManager.Instance != null && GameManager.Instance.GetCurrentMoney() < towerCost)
         {
@@ -79,7 +78,7 @@ public class SkryptDodania: MonoBehaviour
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
                 Debug.Log("Placement canceled by right click");
-                CleanupPlacement(); // już masz funkcję, która usuwa ghost i resetuje isPlacing
+                CleanupPlacement();
                 return;
             }
 

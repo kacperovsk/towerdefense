@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8379252001439068255}
   - component: {fileID: 6436273793514537170}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Health_bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: -9178404209747810400}
   - component: {fileID: -1510603124571337063}
   - component: {fileID: -7454794707967704577}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Monster6
   m_TagString: Enemy
   m_Icon: {fileID: 2800000, guid: 2baa1ba58ca51304e8957ea4c3912a0a, type: 3}

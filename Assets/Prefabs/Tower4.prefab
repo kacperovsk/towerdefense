@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -2801409215071612346, guid: c5986cf7464c0e84bb2e2c3c8ae568ad, type: 3}
-  towerName: Archer Tower
+  towerName: Mage Tower
   cost: 120
   range: 2
   fireRate: 1

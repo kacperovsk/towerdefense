@@ -29,7 +29,7 @@ public class WaveSystem : MonoBehaviour
     public bool autoStartNextWave = false; 
     public float timeBetweenWaves = 5f;
 
-    [Header("UI (optional)")]
+    [Header("UI (>NOT< optional)")]
     public Button nextWaveButton;
     public Toggle autoStartToggle;
     public TextMeshProUGUI waveInfoText; // tekst informacyjny, mozemy tu wrzucic ktora fala albo co jest w danej fali
