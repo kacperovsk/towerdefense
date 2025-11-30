@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 835197660668371626}
   - component: {fileID: 7190633720438574591}
   - component: {fileID: 6535882793667859019}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Special_Monster1
   m_TagString: Enemy
   m_Icon: {fileID: 2800000, guid: 819d255b06145634f84e3327ef1f9e95, type: 3}
@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1864610421797159812}
   - component: {fileID: 6844850220402615115}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Health_bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 1571061464513414824}
   - component: {fileID: 5060675767769172631}
   - component: {fileID: 8895818606092775240}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

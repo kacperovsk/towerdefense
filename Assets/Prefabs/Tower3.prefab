@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -7371822249899153996, guid: f0b8bc630e4951d4590275021d690b96, type: 3}
-  towerName: Archer Tower
+  towerName: Catapult Tower
   cost: 150
   range: 5
   fireRate: 0.25
