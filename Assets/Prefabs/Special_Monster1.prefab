@@ -388,4 +388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MSAura
   radius: 0.5
-  speedMultiplier: 1.1
+  affectMaxHealth: 0
+  maxHealthMultiplier: 1.2
+  affectMoveSpeed: 1
+  moveSpeedMultiplier: 1.25
+  affectDamage: 0
+  damageMultiplier: 1.2
