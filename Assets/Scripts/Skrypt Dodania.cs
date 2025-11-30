@@ -95,6 +95,7 @@ public class SkryptDodania: MonoBehaviour
                     if (towerScript != null)
                         towerScript.isGhost = false;
                         towerScript.HideRange();
+                        towerScript.justPlaced = true;
 
                         // I usuń wieżę widmo
                         CleanupPlacement();
