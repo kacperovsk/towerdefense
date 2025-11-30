@@ -9,15 +9,15 @@ public class SkryptDodania: MonoBehaviour
     public Color validColor = new Color(0.2f, 1f, 0.2f, 0.5f); // Green, semi-transparent
     public Color invalidColor = new Color(1f, 0.2f, 0.2f, 0.5f); // Red, semi-transparent
     private GameObject currentGhostTower;
-    private bool isPlacing = false;
     private bool isValidPlacement = false;
     
     public void OnDodajButtonClick()
     {
         int towerCost = towerPrefab.GetComponent<Tower>().cost;
-        if (isPlacing)
+        if (GameManager.Instance.isPlacing)
         {
-            CleanupPlacement();
+            Debug.Log("Tower is currently being placed.");
+            return;
         }
         if (GameManager.Instance != null && GameManager.Instance.GetCurrentMoney() < towerCost)
         {
@@ -44,16 +44,15 @@ public class SkryptDodania: MonoBehaviour
                 Destroy(currentGhostTower);
                 return;
             }
-            
-            isPlacing = true;
+
+            GameManager.Instance.isPlacing = true;
             Debug.Log("Placement mode activated. Follow the mouse.");
         }
     }
 
     void Update()
     {
-        
-        if (isPlacing)
+        if (GameManager.Instance.isPlacing && currentGhostTower != null)
         {
             // Ustawienie kosztu wieży z prefaba.
             int towerCost = towerPrefab.GetComponent<Tower>().cost;
@@ -212,6 +211,6 @@ public class SkryptDodania: MonoBehaviour
         {
             Destroy(currentGhostTower);
         }
-        isPlacing = false;
+        GameManager.Instance.isPlacing = false;
     }
 }

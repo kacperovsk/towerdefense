@@ -89,9 +89,7 @@ public class GameManager : MonoBehaviour
 
         if (playerLife <= 0)
         {
-            // TO JEST KLUCZOWA LOGIKA "KONIEC GRY"
-            Debug.Log("KONIEC GRY! Straciłeś wszystkie życia.");
-            Time.timeScale = 0f; // Zatrzymuje czas gry, co jest najprostszym warunkiem przegranej
+            ShowLoserPanel();
         }
     }
 
@@ -150,8 +148,36 @@ public class GameManager : MonoBehaviour
 
     public void GoToMenu()
     {
-        Time.timeScale = 1f;
-        //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);   // podobno resetuje scene przy okazji zmienienia na inna.
-        SceneManager.LoadScene("MainMenu");   // Wylaczone do testow.
+        ConfirmationMenu.Instance.Show(() =>
+        {
+            Time.timeScale = 1f;
+            //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);   // podobno resetuje scene przy okazji zmienienia na inna.
+            SceneManager.LoadScene("MainMenu");   // Wylaczone do testow.
+        });
+    }
+
+    public void GoToMenuNoConfirm()
+    {
+            Time.timeScale = 1f;
+            //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);   // podobno resetuje scene przy okazji zmienienia na inna.
+            SceneManager.LoadScene("MainMenu");   // Wylaczone do testow.
+    }
+
+    // Tymczasowe rozwiazanie wielu skryptów do stawiania wież.
+    [Header("Tower Placement Shared State")]
+    public bool isPlacing = false;
+
+    public GameObject winPanel;
+    public GameObject losePanel;
+    public void ShowWinnerPanel()
+    {
+        Time.timeScale = 0f;
+        winPanel.SetActive(true);
+    }
+
+    public void ShowLoserPanel()
+    {
+        Time.timeScale = 0f;
+        losePanel.SetActive(true);
     }
 }

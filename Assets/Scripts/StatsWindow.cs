@@ -13,8 +13,9 @@ public class StatsWindow : MonoBehaviour
     public TextMeshProUGUI radiusText;
     public TextMeshProUGUI costText;
     public Image costIcon;
-    public bool showCost = false;
-
+    public bool hoveredOver = false;
+    public Button sellButton;
+    private float sellRefundPercent = 0.5f; // 50%
     private void Awake()
     {
         if (Instance == null)
@@ -40,16 +41,40 @@ public class StatsWindow : MonoBehaviour
         damageText.text = $"Damage: {stats.damage}";
         attackspeedText.text = $"AS: {stats.fireRate}";
         radiusText.text = $"Range: {stats.range}";
-        if (showCost)
+        if (hoveredOver)
         {
             costText.text = stats.cost.ToString();
             costText.gameObject.SetActive(true);
             costIcon.gameObject.SetActive(true);
+            sellButton.gameObject.SetActive(false);
         }
         else
         {
             costText.gameObject.SetActive(false);
             costIcon.gameObject.SetActive(false);
+            sellButton.gameObject.SetActive(true);
         }
+    }
+
+    public void SellActiveTower()
+    {
+        if (TowerClickHandler.Instance == null || TowerClickHandler.Instance.activeTower == null)
+            return;
+
+        Tower tower = TowerClickHandler.Instance.activeTower;
+
+        // Oddaj hajs
+        if (GameManager.Instance != null)
+        {
+            int refund = Mathf.RoundToInt(tower.cost * sellRefundPercent);
+            GameManager.Instance.AddMoney(refund);
+        }
+
+        // Niszczenie wie¿y
+        Destroy(tower.gameObject);
+
+        // Reset UI
+        TowerClickHandler.Instance.activeTower = null;
+        gameObject.SetActive(false);
     }
 }
