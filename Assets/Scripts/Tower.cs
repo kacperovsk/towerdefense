@@ -24,15 +24,12 @@ public class Tower : MonoBehaviour
 {
     [SerializeField] public Sprite towerIcon;
     [SerializeField] public string towerName;
-
-    // koszt przesuniety z skryptu dodania.
     [SerializeField] public int cost;
 
     [SerializeField] private float range = 2f;
     public float fireRate = 1f;
     public float damage = 4f;
 
-    // Zmienione na hideininspector zeby nikt przez przypadek nie zmienil :skull:
     [HideInInspector] public bool isGhost = false;
 
     [SerializeField] private GameObject projectilePrefab;
@@ -43,8 +40,18 @@ public class Tower : MonoBehaviour
 
     private float fireCountdown = 0f;
     private Enemy targetEnemy;
+
+    // Bazowe statystyki publiczne do odczytu przez buffy
+    public float baseDamage { get; private set; }
+    public float baseFireRate { get; private set; }
+
+    private float buffMultiplierTotal = 1f;
+
     private void Awake()
     {
+        baseDamage = damage;
+        baseFireRate = fireRate;
+
         if (rangeCircle == null)
         {
             rangeCircle = gameObject.AddComponent<LineRenderer>();
@@ -55,32 +62,21 @@ public class Tower : MonoBehaviour
             rangeCircle.endWidth = 0.02f;
             rangeCircle.startColor = Color.grey;
             rangeCircle.endColor = Color.grey;
-            rangeCircle.enabled = false; // na start niewidoczny
-            rangeCircle.sortingOrder = 2; // UI ma 1, mapa 0, wieze 2
+            rangeCircle.enabled = false;
+            rangeCircle.sortingOrder = 2;
         }
     }
 
-    private void Start()
-    {
-
-    }
     void Update()
     {
         UpdateTarget();
 
         if (showRange)
-            DrawCircle();
+            DrawRangeCircle(range);
 
-        // Nie strzela jak jest duchem (przeniesione z skryptu dodania)
-        if (isGhost)
-            return;
+        if (isGhost || targetEnemy == null) return;
 
-        if (targetEnemy == null )
-        {
-            return;
-        }
-
-        if(fireCountdown <= 0f)
+        if (fireCountdown <= 0f)
         {
             Shoot();
             fireCountdown = 1f / fireRate;
@@ -104,8 +100,7 @@ public class Tower : MonoBehaviour
             if (enemy == null) continue;
 
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy > range)
-                continue;
+            if (distanceToEnemy > range) continue;
 
             float progress = enemy.GetProgress();
 
@@ -122,24 +117,22 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
+        if (targetEnemy == null) return;
+
         GameObject projectileParent = GameObject.Find("Projectiles");
         GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity, projectileParent != null ? projectileParent.transform : null);
 
         Projectile projectile = projectileGO.GetComponent<Projectile>();
         if (projectile != null)
         {
-            // Pass tower's damage to the projectile
-            projectile.SetTarget(targetEnemy, damage);
-        }
-    }
+            Vector2 dir = (targetEnemy.transform.position - shootPoint.position);
+            if (dir.sqrMagnitude < 0.0001f) dir = (Vector2)transform.up;
 
-    void DrawCircle()
-    {
-        for (int i = 0; i < rangeCircle.positionCount; i++)
-        {
-            float angle = 2 * Mathf.PI * i / rangeCircle.positionCount;
-            Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * range;
-            rangeCircle.SetPosition(i, transform.position + pos);
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            projectileGO.transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+
+            projectile.lastDirection = dir.normalized;
+            projectile.SetTarget(targetEnemy, damage);
         }
     }
 
@@ -151,14 +144,50 @@ public class Tower : MonoBehaviour
     public void ShowRange()
     {
         showRange = true;
-        if (rangeCircle != null)
-            rangeCircle.enabled = true;
+        if (rangeCircle != null) rangeCircle.enabled = true;
     }
 
     public void HideRange()
     {
         showRange = false;
-        if (rangeCircle != null)
-            rangeCircle.enabled = false;
+        if (rangeCircle != null) rangeCircle.enabled = false;
+    }
+
+    public void ApplyBuff(float multiplier)
+    {
+        buffMultiplierTotal *= multiplier;
+        UpdateStats();
+    }
+
+    public void RemoveBuff(float multiplier)
+    {
+        buffMultiplierTotal /= multiplier;
+        UpdateStats();
+    }
+
+    private void UpdateStats()
+    {
+        damage = baseDamage * buffMultiplierTotal;
+        fireRate = baseFireRate * buffMultiplierTotal;
+    }
+
+    // Range dla karczm się pierdolił więc dodałem gettery żeby bezpośrednio u nich w skrypcie zrobić range, fml
+    public float GetRange() => range;
+
+    public bool IsShowingRange() => showRange;
+
+    public LineRenderer GetRangeCircle() => rangeCircle;
+
+    // Metoda też do tego
+    public void DrawRangeCircle(float customRadius)
+    {
+        if (!showRange || rangeCircle == null) return;
+
+        for (int i = 0; i < rangeCircle.positionCount; i++)
+        {
+            float angle = 2 * Mathf.PI * i / rangeCircle.positionCount;
+            Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * customRadius;
+            rangeCircle.SetPosition(i, transform.position + pos);
+        }
     }
 }
