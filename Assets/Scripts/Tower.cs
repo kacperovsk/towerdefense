@@ -31,6 +31,7 @@ public class Tower : MonoBehaviour
     public float damage = 4f;
 
     [HideInInspector] public bool isGhost = false;
+    [HideInInspector] public bool justPlaced = false;
 
     [SerializeField] private GameObject projectilePrefab;
     public Transform shootPoint;
