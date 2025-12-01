@@ -119,7 +119,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8379252001439068255}
@@ -137,11 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739228f38cd2c6545a65322203271cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveSpeed: 2
+  moveSpeed: 1
   currentMoveSpeed: 0
   currentPath: {fileID: 0}
-  baseMaxHealth: 20
-  health: 20
+  baseMaxHealth: 500
+  health: 500
   healthBar: {fileID: 8379252001439068255}
   playerDamage: 10
   currentPlayerDamage: 0

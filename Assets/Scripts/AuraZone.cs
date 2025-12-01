@@ -38,8 +38,6 @@ public class AuraZone : MonoBehaviour
         {
             affectedEnemies.Add(enemy);
             ApplyAura(enemy);
-
-            Debug.Log($"<color=green>[AURA ENTER]</color> {enemy.name} wszed³ w aurê <b>{gameObject.name}</b>");
         }
 
     }
@@ -53,8 +51,6 @@ public class AuraZone : MonoBehaviour
         {
             RemoveAura(enemy);
             affectedEnemies.Remove(enemy);
-
-            Debug.Log($"<color=red>[AURA EXIT]</color> {enemy.name} opuœci³ aurê <b>{gameObject.name}</b>");
         }
     }
 

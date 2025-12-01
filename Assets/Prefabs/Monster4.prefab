@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   moveSpeed: 1.5
-  currentMoveSpeed: 0
+  currentMoveSpeed: 1.5
   currentPath: {fileID: 0}
-  baseMaxHealth: 80
-  health: 80
+  baseMaxHealth: 60
+  health: 60
   healthBar: {fileID: 1067563450288329494}
   playerDamage: 1
   currentPlayerDamage: 0
