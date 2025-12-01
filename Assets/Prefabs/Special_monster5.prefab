@@ -51,8 +51,8 @@ MonoBehaviour:
   moveSpeed: 2
   currentMoveSpeed: 2
   currentPath: {fileID: 0}
-  baseMaxHealth: 20
-  health: 20
+  baseMaxHealth: 40
+  health: 40
   healthBar: {fileID: 5083107192220952430}
   playerDamage: 0
   currentPlayerDamage: 0
