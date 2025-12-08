@@ -158,10 +158,11 @@ MonoBehaviour:
   fireRate: 0
   damage: 0
   isGhost: 0
+  justPlaced: 0
   projectilePrefab: {fileID: 0}
   shootPoint: {fileID: 0}
   buffRadius: 3
-  buffMultiplier: 1.1
+  buffMultiplier: 1.25
 --- !u!1 &8565588886787649783
 GameObject:
   m_ObjectHideFlags: 0

@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871cc280c9d122a4a9f5be9280fb8515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  dodgeChance: 0.75
+  dodgeChance: 0.9
   moneyToSteal: 100
 --- !u!1 &8809360653349017035
 GameObject:
