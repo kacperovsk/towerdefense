@@ -107,11 +107,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -2801409215071612346, guid: c5986cf7464c0e84bb2e2c3c8ae568ad, type: 3}
   towerName: Mage Tower
-  cost: 120
+  cost: 125
   range: 2
   fireRate: 1
   damage: 4
   isGhost: 0
+  justPlaced: 0
   projectilePrefab: {fileID: 1483898852620040137, guid: 290379d1a598715449124b4d513ca992, type: 3}
   shootPoint: {fileID: 5751366994624188520}
 --- !u!58 &3465177211175200618

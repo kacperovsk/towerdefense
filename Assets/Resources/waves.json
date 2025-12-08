@@ -1,0 +1,1508 @@
+{
+  "waves": [
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 8,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 1
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 14,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 2
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 8,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 4,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 3
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 14,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 10,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 4
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 3,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 15,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 5
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 9,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 12,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 3,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 6
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 12,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 15,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 4,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 7
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 6,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 15,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 9,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 8
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster3",
+          "count": 20,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 9
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster2",
+          "count": 56,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 10
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 4,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 8,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 5,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 3,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 11
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster2",
+          "count": 12,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 4,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 5,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 12
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster2",
+          "count": 25,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 15,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 13
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 18,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 11,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 6,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 9,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 14
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 8,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 11,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 7,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 3,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 15
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster3",
+          "count": 24,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 8,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 16
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 12,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster5",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 17
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster3",
+          "count": 48,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 18
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster3",
+          "count": 6,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 9,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 9,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster1",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster4",
+          "count": 2,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 19
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 6,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 20
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 40,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 9,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 21
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 16,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 22
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 14,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 2,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 23
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster2",
+          "count": 20,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster3",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 24
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 25,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 6,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 25
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster7",
+          "count": 13,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 4,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 26
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 40,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster2",
+          "count": 30,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster3",
+          "count": 25,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 20,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 27
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster5",
+          "count": 12,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 28
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 60,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster5",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 29
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster5",
+          "count": 18,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 30
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 16,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 10,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 31
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 35,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 6,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 32
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 13,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster3",
+          "count": 2,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 33
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 160,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 34
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 55,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 21,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 5,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 35
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 20,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 84,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 36
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 50,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster5",
+          "count": 30,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 17,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 37
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 17,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster5",
+          "count": 28,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 25,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster3",
+          "count": 2,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 38
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 20,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 40,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 39
+    },
+    {
+      "enemyGroups": [],
+      "waveNumber": 40
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 60,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster5",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster1",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster5",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 41
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster8",
+          "count": 22,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster4",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 42
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster8",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 7,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 43
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster8",
+          "count": 50,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 44
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster5",
+          "count": 8,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 110,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 25,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 45
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 6,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster3",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 46
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster5",
+          "count": 24,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 12,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 47
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster5",
+          "count": 40,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 40,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 20,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 3,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster1",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster4",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 48
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster3",
+          "count": 300,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster5",
+          "count": 20,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 18,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster4",
+          "count": 5,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 49
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster1",
+          "count": 15,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster5",
+          "count": 16,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 20,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 2,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 50
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster7",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 15,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster1",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster4",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster5",
+          "count": 3,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 51
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster8",
+          "count": 20,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 10,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster5",
+          "count": 5,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 2,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 52
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster3",
+          "count": 80,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 3,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 53
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 35,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 54
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 45,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster5",
+          "count": 5,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 55
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster8",
+          "count": 40,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster1",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster4",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 56
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster8",
+          "count": 40,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster1",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster5",
+          "count": 5,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 4,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 57
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 25,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 5,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 58
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster5",
+          "count": 100,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 30,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster1",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster4",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 59
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Boss2",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 60
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster5",
+          "count": 100,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 25,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 50,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 15,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 5,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 61
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 200,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 15,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 10,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 62
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster5",
+          "count": 75,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 122,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 63
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Special_Monster1",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster3",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 12,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 64
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 50,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster5",
+          "count": 75,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster6",
+          "count": 20,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 100,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 50,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster5",
+          "count": 5,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 3,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 65
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Boss1",
+          "count": 14,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 66
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 26,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 8,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 67
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Boss1",
+          "count": 4,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 68
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster4",
+          "count": 80,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 40,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 50,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 69
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 60,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster7",
+          "count": 60,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 200,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 4,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 70
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 30,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 10,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 71
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 38,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 72
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Boss1",
+          "count": 8,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 73
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 175,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 74
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster5",
+          "count": 14,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 14,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss1",
+          "count": 6,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 7,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 75
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster9",
+          "count": 60,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Special_Monster2",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 76
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Boss1",
+          "count": 11,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 5,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 77
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster6",
+          "count": 80,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster8",
+          "count": 75,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Monster9",
+          "count": 150,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 78
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Monster8",
+          "count": 250,
+          "spawnInterval": 0.5
+        },
+        {
+          "prefab": "Boss2",
+          "count": 8,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 79
+    },
+    {
+      "enemyGroups": [
+        {
+          "prefab": "Boss3",
+          "count": 1,
+          "spawnInterval": 0.5
+        }
+      ],
+      "waveNumber": 80
+    }
+  ]
+}
