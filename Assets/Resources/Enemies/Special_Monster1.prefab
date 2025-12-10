@@ -387,6 +387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019da98a67da8204ea42ffcf3516ab20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MSAura
+  maxHealthIcon: {fileID: 0}
+  moveSpeedIcon: {fileID: 7780666194169626827, guid: 746d3871cbf42b54cb552dad07bdbe8e, type: 3}
+  damageIcon: {fileID: 0}
   radius: 0.5
   affectMaxHealth: 0
   maxHealthMultiplier: 1.2

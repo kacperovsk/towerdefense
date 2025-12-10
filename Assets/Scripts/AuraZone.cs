@@ -4,6 +4,12 @@ using System.Collections.Generic;
 [RequireComponent(typeof(CircleCollider2D))]
 public class AuraZone : MonoBehaviour
 {
+
+    [Header("Icons")]
+    public Sprite maxHealthIcon;
+    public Sprite moveSpeedIcon;
+    public Sprite damageIcon;
+
     [Header("Aura Settings")]
     public float radius = 3f;
 
@@ -56,25 +62,47 @@ public class AuraZone : MonoBehaviour
 
     private void ApplyAura(Enemy enemy)
     {
+        EnemyBuffIcons icons = enemy.GetComponent<EnemyBuffIcons>();
+
         if (affectMaxHealth)
+        {
             enemy.ApplyAuraEffect(Enemy.AuraStat.MaxHealth, maxHealthMultiplier);
+            if (icons) icons.ShowIcon(Enemy.AuraStat.MaxHealth, maxHealthIcon);
+        }
 
         if (affectMoveSpeed)
+        {
             enemy.ApplyAuraEffect(Enemy.AuraStat.MoveSpeed, moveSpeedMultiplier);
+            if (icons) icons.ShowIcon(Enemy.AuraStat.MoveSpeed, moveSpeedIcon);
+        }
 
         if (affectDamage)
+        {
             enemy.ApplyAuraEffect(Enemy.AuraStat.Damage, damageMultiplier);
+            if (icons) icons.ShowIcon(Enemy.AuraStat.Damage, damageIcon);
+        }
     }
 
     private void RemoveAura(Enemy enemy)
     {
+        EnemyBuffIcons icons = enemy.GetComponent<EnemyBuffIcons>();
+
         if (affectMaxHealth)
+        {
             enemy.RemoveAuraEffect(Enemy.AuraStat.MaxHealth, maxHealthMultiplier);
+            if (icons) icons.HideIcon(Enemy.AuraStat.MaxHealth);
+        }
 
         if (affectMoveSpeed)
+        {
             enemy.RemoveAuraEffect(Enemy.AuraStat.MoveSpeed, moveSpeedMultiplier);
+            if (icons) icons.HideIcon(Enemy.AuraStat.MoveSpeed);
+        }
 
         if (affectDamage)
+        {
             enemy.RemoveAuraEffect(Enemy.AuraStat.Damage, damageMultiplier);
+            if (icons) icons.HideIcon(Enemy.AuraStat.Damage);
+        }
     }
 }
