@@ -183,6 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019da98a67da8204ea42ffcf3516ab20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AuraZone
+  maxHealthIcon: {fileID: -3976524194429586363, guid: a2d8b13a47ed26c44b148600b09a23d6, type: 3}
+  moveSpeedIcon: {fileID: 0}
+  damageIcon: {fileID: 0}
   radius: 0.5
   affectMaxHealth: 1
   maxHealthMultiplier: 1.5
