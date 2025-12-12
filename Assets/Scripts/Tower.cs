@@ -48,8 +48,14 @@ public class Tower : MonoBehaviour
 
     private float buffMultiplierTotal = 1f;
 
+    private SpriteRenderer sr;
+    private Color originalColor;
+
     private void Awake()
     {
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
+
         baseDamage = damage;
         baseFireRate = fireRate;
 
@@ -83,6 +89,29 @@ public class Tower : MonoBehaviour
             fireCountdown = 1f / fireRate;
         }
         fireCountdown -= Time.deltaTime;
+    }
+    public void Highlight()
+    {
+        sr.color = Color.yellow;
+    }
+
+    public void Unhighlight()
+    {
+        sr.color = originalColor;
+    }
+
+    public void ApplyCardDamageBuff(float value)
+    {
+        damage += value;
+        Debug.Log($"{name} otrzymała buff damage +{value}");
+    }
+    public void ApplyAttackSpeedBuff(float value)
+    {
+        fireRate += value;
+    }
+    public void ApplyRangeBuff(float value)
+    {
+        range += value;
     }
 
     private void UpdateTarget()

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     // Początkowa ilość pieniędzy gracza
     [SerializeField] private int currentMoney = 250;
     public TextMeshProUGUI LicznikPieniedzy;
+    [Header("Passive Gold")]
+    public int passiveGoldIncome = 0;
     // Początkowa ilość życia gracza
     [Header("Life")]
     [SerializeField] private int playerLife = 100;
@@ -77,6 +79,14 @@ public class GameManager : MonoBehaviour
         if (LicznikPieniedzy != null)
         {
             LicznikPieniedzy.text = currentMoney.ToString();
+        }
+    }
+    public void GrantPassiveIncome()
+    {
+        if (passiveGoldIncome > 0)
+        {
+            AddMoney(passiveGoldIncome);
+            Debug.Log("Passive gold granted: " + passiveGoldIncome);
         }
     }
     // Metoda tracenia życia
