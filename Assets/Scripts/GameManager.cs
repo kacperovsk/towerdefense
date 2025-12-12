@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
 
         if (playerLife <= 0)
         {
+            playerLife = 0; // zeby ladniej wygladalo. 0 na koniec.
             ShowLoserPanel();
         }
     }
@@ -181,11 +182,85 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         winPanel.SetActive(true);
+
+
+        int finalScore = CalculateScore();
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        int currentHighscore = PlayerPrefs.GetInt(sceneName + "_Highscore", 0);
+        if (finalScore > currentHighscore)
+        {
+            PlayerPrefs.SetInt(sceneName + "_Highscore", finalScore);
+            PlayerPrefs.Save();
+            Debug.Log($"Nowy najwyższy wynik dla {sceneName}: {finalScore}");
+        }
+
+        if (scoreText != null)
+            scoreText.text = $"Wynik: {finalScore}";
+
+        UnlockNextMap();
     }
 
     public void ShowLoserPanel()
     {
         Time.timeScale = 0f;
         losePanel.SetActive(true);
+
+        int finalScore = CalculateScore();
+        finalScore = finalScore / 2;    // na przegranej jest 0.5x pktow
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        int currentHighscore = PlayerPrefs.GetInt(sceneName + "_Highscore", 0);
+        Debug.Log($"Current highscore: {currentHighscore}");
+        Debug.Log($"Current score: {finalScore}");
+        Debug.Log($"Enemies defeated: {totalEnemiesDefeated}");
+        if (finalScore > currentHighscore)
+        {
+            PlayerPrefs.SetInt(sceneName + "_Highscore", finalScore);
+            PlayerPrefs.Save();
+            Debug.Log($"Nowy najwyższy wynik dla {sceneName}: {finalScore}");
+        }
+
+        if (scoreText != null)
+            scoreText.text = $"Wynik: {finalScore}";
+
+    }
+
+    private void UnlockNextMap()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        int currentIndex = -1;
+
+        if (currentScene.StartsWith("GameMap"))
+        {
+            string number = currentScene.Substring("GameMap".Length);
+            int.TryParse(number, out currentIndex);
+        }
+
+        if (currentIndex >= 0)
+        {
+            int nextIndex = currentIndex + 1;
+
+            // zapisujemy odblokowanie następnej mapy w PlayerPrefs
+            PlayerPrefs.SetInt($"Map{nextIndex}Unlocked", 1);
+            PlayerPrefs.Save();
+
+            Debug.Log($"Odblokowano mapę nr {nextIndex}");
+        }
+    }
+
+    [Header("Score")]
+    public TextMeshProUGUI scoreText;
+    private int totalEnemiesDefeated = 0;
+
+    public void RegisterEnemyDefeat()
+    {
+        totalEnemiesDefeated++;
+    }
+
+    public int CalculateScore()
+    {
+        return (totalEnemiesDefeated * 5) + (playerLife * 10);
     }
 }
