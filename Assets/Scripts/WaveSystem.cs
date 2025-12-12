@@ -97,6 +97,8 @@ public class WaveSystem : MonoBehaviour
         // spawn zakonczony
         isSpawning = false;
 
+        // passive gold co fale
+        GameManager.Instance.GrantPassiveIncome();
         // wywolanie eventu zakonczenia fali
         OnWaveCompleted?.Invoke(currentWaveIndex + 1);
 
