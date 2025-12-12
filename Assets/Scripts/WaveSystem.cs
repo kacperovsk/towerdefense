@@ -42,6 +42,8 @@ public class WaveSystem : MonoBehaviour
     private bool isSpawning = false; // czy obecnie sie spawnia
     private int enemiesAlive = 0; // ilu zyje obecnie
 
+    public GameManager gameManager; // do Wygranej.
+
     private void Start()
     {
         // przycisk nastepnej fali
@@ -110,10 +112,21 @@ public class WaveSystem : MonoBehaviour
     {
         enemiesAlive--;
 
+        if (gameManager != null)
+            gameManager.RegisterEnemyDefeat();
+
         // jak przeciwnicy nie zyja to mozemy rozpoczac kolejna fale
         if (enemiesAlive <= 0 )
         {
-            if (autoStartNextWave)
+            if(currentWaveIndex >= waves.Length -1)
+            {
+                // Wygrana
+                if (gameManager != null)
+                    gameManager.ShowWinnerPanel();
+                else
+                    Debug.Log("Brakuje gameManager w WaveSystem.");
+            }
+            else if (autoStartNextWave)
                 StartCoroutine(AutoNextWave());
         }
     }

@@ -2037,6 +2037,7 @@ MonoBehaviour:
   OnWaveCompleted:
     m_PersistentCalls:
       m_Calls: []
+  gameManager: {fileID: 0}
 --- !u!4 &249429848
 Transform:
   m_ObjectHideFlags: 0
@@ -3728,6 +3729,7 @@ MonoBehaviour:
   isPlacing: 0
   winPanel: {fileID: 1434399096}
   losePanel: {fileID: 1825803318}
+  scoreText: {fileID: 0}
 --- !u!4 &640266881
 Transform:
   m_ObjectHideFlags: 0
@@ -4951,6 +4953,7 @@ MonoBehaviour:
   OnWaveCompleted:
     m_PersistentCalls:
       m_Calls: []
+  gameManager: {fileID: 640266880}
 --- !u!4 &803513344
 Transform:
   m_ObjectHideFlags: 0
@@ -7798,9 +7801,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486de90fc8485eb408fed68000fa3077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandLayout
+  barRect: {fileID: 0}
   baseSpacing: 160
   minSpacing: 60
-  handWidth: 1300
 --- !u!1001 &1746557277
 PrefabInstance:
   m_ObjectHideFlags: 0
