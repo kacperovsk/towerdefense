@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AoEOnHit
   radius: 0.5
-  damage: 2
+  damageMultiplier: 0.5
   falloff: 0
   indicatorPrefab: {fileID: 3164844315230997361, guid: 9c221e0dad471db49a13ac49fcf7f1d8, type: 3}
   displayTime: 0.3

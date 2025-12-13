@@ -6,7 +6,7 @@ public class AoEOnHit : MonoBehaviour
 {
     [Header("AOE Settings")]
     public float radius = 3f;          // promień AoE
-    public float damage = 100f;        // obrażenia centralne
+    public float damageMultiplier = 1f;        // obrażenia centralne
     [Range(0f,1f)] public float falloff = 0.5f; // procent dmg dla pobliskich celów
 
     [Header("Visual Indicator")]
@@ -38,6 +38,11 @@ public class AoEOnHit : MonoBehaviour
     {
         Vector2 center = transform.position;
 
+        // Liczy obrażenia pocisku za pomocą mnożnika
+        float finalCenterDamage = projectile.BaseDamage * damageMultiplier;
+        // To samo dla fallof
+        float finalFalloffDamage = finalCenterDamage * falloff;
+
         // Damage
         Collider2D[] hits = Physics2D.OverlapCircleAll(center, radius);
         foreach (var c in hits)
@@ -46,9 +51,9 @@ public class AoEOnHit : MonoBehaviour
             if (e == null) continue;
 
             if (e == centerEnemy)
-                e.TakeDamage(damage);
+                e.TakeDamage(finalCenterDamage);
             else
-                e.TakeDamage(damage * falloff);
+                e.TakeDamage(finalFalloffDamage);
         }
 
         // Pokazanie range przy aktywacji
