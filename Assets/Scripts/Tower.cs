@@ -146,25 +146,43 @@ public class Tower : MonoBehaviour
     }
 
     void Shoot()
+{
+    if (targetEnemy == null) return;
+
+    GameObject projectileParent = GameObject.Find("Projectiles");
+    GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity, projectileParent != null ? projectileParent.transform : null);
+
+    Projectile projectile = projectileGO.GetComponent<Projectile>();
+    
+    // 1. Sprawdź, czy pocisk ma komponent FixedPiercingBehaviour
+    FixedPiercingBehaviour fixedPierce = projectileGO.GetComponent<FixedPiercingBehaviour>();
+
+    if (projectile != null)
     {
-        if (targetEnemy == null) return;
+        Vector2 dir = (targetEnemy.transform.position - shootPoint.position);
+        
+        if (dir.sqrMagnitude < 0.0001f) dir = (Vector2)transform.up;
 
-        GameObject projectileParent = GameObject.Find("Projectiles");
-        GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity, projectileParent != null ? projectileParent.transform : null);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        projectileGO.transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
 
-        Projectile projectile = projectileGO.GetComponent<Projectile>();
-        if (projectile != null)
+        projectile.lastDirection = dir.normalized;
+        
+        if (fixedPierce != null)
         {
-            Vector2 dir = (targetEnemy.transform.position - shootPoint.position);
-            if (dir.sqrMagnitude < 0.0001f) dir = (Vector2)transform.up;
+            // Ustawiamy obrażenia za pomocą nowej, bezpiecznej metody
+            projectile.SetDamage(damage); 
 
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            projectileGO.transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
-
-            projectile.lastDirection = dir.normalized;
+            // Aktywacja lotu stałego
+            fixedPierce.Initialize(shootPoint.position, targetEnemy.transform.position);
+        }
+        else
+        {
+            // Standardowa logika homing (która już zawiera ustawienie obrażeń)
             projectile.SetTarget(targetEnemy, damage);
         }
     }
+}
 
     public TowerStats GetStats()
     {

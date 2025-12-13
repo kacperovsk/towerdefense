@@ -7801,7 +7801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486de90fc8485eb408fed68000fa3077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandLayout
-  barRect: {fileID: 0}
+  barRect: {fileID: 1701566997}
   baseSpacing: 160
   minSpacing: 60
 --- !u!1001 &1746557277

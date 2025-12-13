@@ -5,7 +5,9 @@ public class Projectile : MonoBehaviour
 {
     private Enemy target;
     public float speed = 4f;
+    //tymczasowo na public
     private float damage;
+    public float BaseDamage => damage; //Potrzebne do przekazania obrażeń do innej klasy, bo chcieliście AOE bazowane na obrażeniach pocisku do karty
     private bool hasHit = false; // prevents multiple hits (for homing hit)
     // Jak ktoś to czyta, dużo w tym grzebałem aby naprawić piercing, dlatego te funkcje mogą wyglądać inaczej chociaż działają podobnie, głównie kombinowałem z rotacją
     // Już się pogubiłem co zmieniałem więc no
@@ -22,10 +24,19 @@ public class Projectile : MonoBehaviour
     [NonSerialized] public float straightLife = 5f;
     private float straightTimer = 0f;
     // -----------------------------------------------------
+    [NonSerialized] public bool isFixedStraight = false;
+    [NonSerialized] public Vector2 fixedDirection = Vector2.up;
+    [NonSerialized] public float fixedLife = 5f;
+    private float fixedTimer = 0f;
 
     public void SetTarget(Enemy _target, float dmg)
     {
         target = _target;
+        damage = dmg;
+    }
+    //Muszę jakos przekazać damage dla systemu targetowania bez homingu
+    public void SetDamage(float dmg)
+    {
         damage = dmg;
     }
 
@@ -36,18 +47,42 @@ public class Projectile : MonoBehaviour
         straightTimer = 0f;
     }
 
+    public void ActivateFixedStraight(Vector2 direction, float life)
+    {
+        fixedDirection = direction.normalized;
+        fixedLife = life;
+        isFixedStraight = true;
+        target = null;
+        RotateTowards(fixedDirection);
+    }
+
     void Update()
     {
-        // Jeśli jesteśmy w fazie prostego lotu -> leć prosto
-        // I tak kurwa nie leci prosto, fml
+        //Dodaje nowy sposób lotu pocisku, lecący do konkretnej pozycji na mapie. Na długie odległości będzie missować, dlatego stary też zostaje
+        if (isFixedStraight)
+        {
+            float fixedStep = speed * Time.deltaTime;
+            transform.position += (Vector3)(fixedDirection * fixedStep);
+
+            fixedTimer += Time.deltaTime;
+            if (fixedTimer >= fixedLife)
+                Destroy(gameObject);
+
+            return;
+        }
+        
         if (stopHoming)
         {
+            // UŻYWAMY ISTNIEJĄCEJ ZMIENNEJ straightDirection DO KONTUACJI LOTU PO PIERCE
             float straightStep = speed * Time.deltaTime;
-            transform.position += (Vector3)(straightDirection.normalized * straightStep);
+            transform.position += (Vector3)(straightDirection.normalized * straightStep); // Używamy straightDirection
 
             straightTimer += Time.deltaTime;
             if (straightTimer >= straightLife)
             Destroy(gameObject);
+
+            // Utrzymujemy stałą rotację, aby pocisk wyglądał poprawnie w nowym kierunku
+            RotateTowards(straightDirection); 
 
             return;
         }
@@ -78,17 +113,11 @@ public class Projectile : MonoBehaviour
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
-
     void RotateTowards(Vector3 dir)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
-    
-    
-    // ogólnie całe przerobione, trochę z pomocą GPT
-    // Stara wersja rozwala pocisk od razu
-    // Teraz jest opcja że nie, więc leci dalej na zasadzie pierce
     protected virtual void HitTarget()
     {
         if (hasHit) return;
@@ -140,7 +169,8 @@ public class Projectile : MonoBehaviour
     // Wcześniej też działało, ale pierce bez tego miał problem z dmg
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (!stopHoming) return;
+        // Dobrze że wcześniej ten dodatkowy collider robiłem bo teraz się przydaje do lotu prostego
+        if (!stopHoming && !isFixedStraight) return; 
 
         Enemy e = col.GetComponent<Enemy>();
         if (e == null) return;

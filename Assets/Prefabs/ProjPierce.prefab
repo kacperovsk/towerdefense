@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3485123973612570557}
   - component: {fileID: 1661442781881362735}
   - component: {fileID: 6281537190067084632}
-  - component: {fileID: -7740670084213622380}
   - component: {fileID: 6027612481098211677}
+  - component: {fileID: 1079106854288899506}
   m_Layer: 0
   m_Name: ProjPierce
   m_TagString: Untagged
@@ -106,20 +106,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-7740670084213622380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483898852620040137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff5d8ad3dd7be5143b5eae377124737f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PiercingBehaviour
-  additionalPierces: 1
-  lifeAfterPhase: 5
 --- !u!58 &6027612481098211677
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -155,4 +141,18 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.15999998
+  m_Radius: 0.075
+--- !u!114 &1079106854288899506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483898852620040137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612cdb08e47cc4346b9e9dfd421466f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FixedPiercingBehaviour
+  additionalPierces: 1
+  lifeAfterPierce: 5
