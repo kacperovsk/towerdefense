@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5389100548013037952}
   - component: {fileID: 3465177211175200618}
   m_Layer: 6
-  m_Name: Tower2
+  m_Name: Tower5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 5559667929427957976, guid: 37f5270afa7026643893ae612a5e469b, type: 3}
+  m_Sprite: {fileID: -3918393090873308021, guid: 350f74a97d3ae624da799bd8915f9b56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,18 +105,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b9c2e7de68adf42a5ac8ec5bfde959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
-  towerIcon: {fileID: 5559667929427957976, guid: 37f5270afa7026643893ae612a5e469b, type: 3}
-  towerName: Crossbow Tower
-  cost: 100
-  range: 2.5
-  fireRate: 0.8
-  damage: 5
+  towerIcon: {fileID: -3918393090873308021, guid: 350f74a97d3ae624da799bd8915f9b56, type: 3}
+  towerName: Archer Tower
+  cost: 75
+  range: 2
+  fireRate: 1
+  damage: 4
   isGhost: 0
   justPlaced: 0
-  projectilePrefab: {fileID: 1483898852620040137, guid: 7eb47aee7aca1a94a9b4e09c82781db3, type: 3}
+  projectilePrefab: {fileID: 3342686595875523168, guid: f99a236f535710149a94260973172bc6, type: 3}
   shootPoint: {fileID: 5751366994624188520}
-  currentShotType: 1
-  sideShotAngle: 20
 --- !u!58 &3465177211175200618
 CircleCollider2D:
   m_ObjectHideFlags: 0

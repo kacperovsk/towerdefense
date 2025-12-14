@@ -35,6 +35,15 @@ public class Tower : MonoBehaviour
 
     [SerializeField] private GameObject projectilePrefab;
     public Transform shootPoint;
+    public enum ShotType
+    {
+        HomingTarget, // To jak po staremu
+        TripleFixedAngle // To do triple shot
+    }
+    
+    [Header("Shot Configuration")]
+    [SerializeField] private ShotType currentShotType = ShotType.HomingTarget; 
+    [SerializeField] private float sideShotAngle = 20f;
 
     private LineRenderer rangeCircle;
     private bool showRange;
@@ -145,44 +154,88 @@ public class Tower : MonoBehaviour
         targetEnemy = furthestEnemy;
     }
 
-    void Shoot()
-{
-    if (targetEnemy == null) return;
-
-    GameObject projectileParent = GameObject.Find("Projectiles");
-    GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity, projectileParent != null ? projectileParent.transform : null);
-
-    Projectile projectile = projectileGO.GetComponent<Projectile>();
-    
-    // 1. Sprawdź, czy pocisk ma komponent FixedPiercingBehaviour
-    FixedPiercingBehaviour fixedPierce = projectileGO.GetComponent<FixedPiercingBehaviour>();
-
-    if (projectile != null)
+private void Shoot()
     {
-        Vector2 dir = (targetEnemy.transform.position - shootPoint.position);
+        fireCountdown = 1f / fireRate;
         
-        if (dir.sqrMagnitude < 0.0001f) dir = (Vector2)transform.up;
-
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        projectileGO.transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
-
-        projectile.lastDirection = dir.normalized;
-        
-        if (fixedPierce != null)
+        // Do przestawiania typu pocisku
+        switch (currentShotType)
         {
-            // Ustawiamy obrażenia za pomocą nowej, bezpiecznej metody
-            projectile.SetDamage(damage); 
-
-            // Aktywacja lotu stałego
-            fixedPierce.Initialize(shootPoint.position, targetEnemy.transform.position);
+            case ShotType.HomingTarget:
+                // Do klasycznego homingu
+                ShootHoming();
+                break;
+            
+            case ShotType.TripleFixedAngle:
+                // Do triple shot
+                ShootTripleFixedAngle();
+                break;
         }
-        else
+    }
+
+    // Metoda stara
+    private void ShootHoming()
+    {
+        GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+        Projectile projectile = projectileGO.GetComponent<Projectile>();
+
+        if (projectile != null)
         {
-            // Standardowa logika homing (która już zawiera ustawienie obrażeń)
             projectile.SetTarget(targetEnemy, damage);
         }
     }
-}
+    // Logika triple shot
+    private void ShootTripleFixedAngle()
+    {
+        // Pocisk centralny
+        Vector3 targetPosition = targetEnemy.transform.position; 
+        InstantiateTripleShotProjectile(0f, targetPosition);
+
+        // Pociski boczne
+        InstantiateTripleShotProjectile(-sideShotAngle, Vector3.zero); // Lewy
+        InstantiateTripleShotProjectile(sideShotAngle, Vector3.zero);  // Prawy
+
+        targetEnemy = null; 
+    }
+    
+    private void InstantiateTripleShotProjectile(float angleOffset, Vector3 targetPos)
+    {
+        GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+        
+        // Korzysta z FixedPiercing aby mieć ten prosty lot bez homing
+        FixedPiercingBehaviour fixedPierce = projectileGO.GetComponent<FixedPiercingBehaviour>();
+        
+        if (fixedPierce != null)
+        {
+            // dmg
+            projectileGO.GetComponent<Projectile>().SetDamage(damage);
+
+            // strzał centralny celuje
+            if (targetPos != Vector3.zero)
+            {
+                // strzał
+                fixedPierce.Initialize(shootPoint.position, targetPos);
+            }
+            else
+            {
+                // Strzały boczne (nie celują).
+                
+                // Kierunek na podstawie obrotu wieży
+                Quaternion rotation = Quaternion.Euler(0, 0, angleOffset);
+                Vector2 fixedDirection = rotation * shootPoint.up;
+                
+                // Tworzy odległy ceł w tym kierunku (rozwiązanie z neta)
+                Vector3 virtualTarget = shootPoint.position + (Vector3)fixedDirection * 100f; 
+
+                // Strzela
+                fixedPierce.Initialize(shootPoint.position, virtualTarget);
+            }
+        }
+        else
+        {
+            Destroy(projectileGO);
+        }
+    }
 
     public TowerStats GetStats()
     {

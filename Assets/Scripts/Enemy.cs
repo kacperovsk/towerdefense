@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Enemy : MonoBehaviour
     private Vector3 targetPosition;
     private int currentPosition;
     private bool facingRight = true;
+    private float temporarySlowMultiplier = 1f;
+    private HashSet<SlowArea> activeSlows = new HashSet<SlowArea>();
 
     [Header("Health Settings")]
     [SerializeField] private float baseMaxHealth = 10f;
@@ -118,7 +121,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        currentMoveSpeed = moveSpeed * moveSpeedMultiplier;
+        currentMoveSpeed = moveSpeed * moveSpeedMultiplier * temporarySlowMultiplier;
 
         transform.position = Vector3.MoveTowards(
             transform.position,
@@ -270,6 +273,37 @@ public class Enemy : MonoBehaviour
             case AuraStat.Damage:
                 ModifyDamageMultiplier(1f / mult);
                 break;
+        }
+    }
+    // Metoda wywoływana przez SlowArea po wejściu w obszar
+    public void ApplySlow(SlowArea slowSource, float slowMult)
+    {
+        if (activeSlows.Add(slowSource))
+        {
+            // Gdyby jakiś slow był silniejszy, to tylko silniejszy zadziała (dodaje na wypadek kart)
+            if (slowMult < temporarySlowMultiplier)
+            {
+                temporarySlowMultiplier = slowMult;
+            }
+        }
+    }
+
+    // Gdy coś wyjdzie z obszaru
+    public void RemoveSlow(SlowArea slowSource)
+    {
+        if (activeSlows.Remove(slowSource))
+        {
+            // Tutaj bardzo ważne - przelicza jeszcze raz slowa na podstawie kolejnych obszarów slowa.
+            // Czyli wyjdzie z jednego to zamiast usuwać debuff patrzy czy jest kolejny, wieża lubi stawiać ich dużo więc potrzebne
+            float maxSlow = 1f;
+            foreach (var slow in activeSlows)
+            {
+                if (slow.slowMultiplier < maxSlow)
+                {
+                    maxSlow = slow.slowMultiplier;
+                }
+            }
+            temporarySlowMultiplier = maxSlow;
         }
     }
 }
