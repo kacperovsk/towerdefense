@@ -56,8 +56,8 @@ MonoBehaviour:
   baseMaxHealth: 15
   health: 15
   healthBar: {fileID: 1682025732342021866}
-  playerDamage: 5
-  currentPlayerDamage: 0
+  playerDamage: 6
+  currentPlayerDamage: 6
   moneyValue: 6
 --- !u!212 &8860265072777649300
 SpriteRenderer:
