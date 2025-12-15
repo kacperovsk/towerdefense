@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1838f81904e17414495af590eacf5d6e, type: 3}
   m_Name: TowerAttackSpeedEffect
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttackSpeedEffect
-  effectName: 
-  description: 
+  targetType: 1
   addAmount: 0.5

@@ -6386,6 +6386,9 @@ MonoBehaviour:
   aimPrefab: {fileID: 3604712204172127397, guid: 28ee2450f576a6e4a83b45c71df3938b, type: 3}
   availableCards:
   - {fileID: 11400000, guid: 9d4e8f7568545744a8f659e6ff03a59b, type: 2}
+  - {fileID: 11400000, guid: 49a2f11216bbe7240a07a19056c58c27, type: 2}
+  - {fileID: 11400000, guid: f731c763dec861b499747df6eaf4cec7, type: 2}
+  - {fileID: 11400000, guid: 80ce0ca44956cea4ca8d3c9423337d50, type: 2}
 --- !u!1 &1196908339
 GameObject:
   m_ObjectHideFlags: 0
