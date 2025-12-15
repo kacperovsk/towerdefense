@@ -212,7 +212,11 @@ public class Enemy : MonoBehaviour
     public int GetCurrentWaypoint() => currentPosition;
     private void UpdateHealhBar()
     {
+        if (currentMaxHealth <= 0f)
+            return;
+
         float healthPercent = health / currentMaxHealth;
+        healthPercent = Mathf.Clamp01(healthPercent);
 
         Vector3 scale = _healthBarOriginalScale;
         scale.x = _healthBarOriginalScale.x * healthPercent;

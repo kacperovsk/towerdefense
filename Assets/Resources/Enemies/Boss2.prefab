@@ -58,7 +58,7 @@ MonoBehaviour:
   healthBar: {fileID: 5083107192220952430}
   playerDamage: 99
   currentPlayerDamage: 99
-  moneyValue: 15
+  moneyValue: 200
 --- !u!212 &4941225622946099113
 SpriteRenderer:
   m_ObjectHideFlags: 0
