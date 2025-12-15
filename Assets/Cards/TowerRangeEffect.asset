@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafc82598097bbc428494bda1a7360a6, type: 3}
   m_Name: TowerRangeEffect
   m_EditorClassIdentifier: Assembly-CSharp::TowerRangeEffect
-  targetType: 0
+  targetType: 1
   addAmount: 0.5

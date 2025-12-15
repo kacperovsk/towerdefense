@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6f49d4c43c5c64db005e38ba475e0f, type: 3}
   m_Name: PassiveGoldEffect
   m_EditorClassIdentifier: Assembly-CSharp::PassiveGoldIncomeEffect
-  targetType: 0
+  targetType: 2
   addAmount: 5
