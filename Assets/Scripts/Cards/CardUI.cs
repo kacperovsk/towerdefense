@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour,
     IPointerEnterHandler, IPointerExitHandler,
-    IPointerDownHandler, IPointerUpHandler, IDragHandler
+    IPointerDownHandler, IPointerUpHandler
 {
     [Header("Card Settings")]
     public float hoverScale = 1.2f;
@@ -13,15 +13,28 @@ public class CardUI : MonoBehaviour,
     [Header("References")]
     public RectTransform rect;
     public Image cardImage;
-    public CardData cardData; 
+    public CardData cardData;
 
     private Vector3 originalScale;
-    public bool isHovered = false;
-    private bool isDragging = false;
+    private CardAim aim;
 
-    private GameObject aimIndicator;
-    //private bool dragStarted = false;
-    private int originalIndex;
+    public enum CardInteractionState
+    {
+        None,
+        Hover,
+        Targeting, // LPM
+        Dragging   // PPM
+    }
+
+    public CardInteractionState State { get; private set; } = CardInteractionState.None;
+
+    public bool IsHovered =>
+        State == CardInteractionState.Hover ||
+        State == CardInteractionState.Targeting;
+
+    public bool IsActive =>
+        State == CardInteractionState.Targeting ||
+        State == CardInteractionState.Dragging;
 
     private void Awake()
     {
@@ -30,74 +43,120 @@ public class CardUI : MonoBehaviour,
 
     private void Update()
     {
-        Vector3 targetScale = isHovered ? originalScale * hoverScale : originalScale;
-        rect.localScale = Vector3.Lerp(rect.localScale, targetScale, Time.deltaTime * animationSpeed);
+        Vector3 targetScale = IsHovered ? originalScale * hoverScale : originalScale;
+        rect.localScale = Vector3.Lerp(
+            rect.localScale,
+            targetScale,
+            Time.deltaTime * animationSpeed
+        );
 
-        if (isDragging && aimIndicator != null)
+        if (State == CardInteractionState.Dragging)
         {
-            Vector3 pos;
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(
-                rect, Input.mousePosition, null, out pos);
-            aimIndicator.transform.position = pos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                rect.parent as RectTransform,
+                Input.mousePosition,
+                null,
+                out Vector2 localPos
+            );
+            rect.localPosition = localPos;
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        isHovered = true;
-        originalIndex = transform.GetSiblingIndex();
-        transform.SetSiblingIndex(999); 
+        if (State == CardInteractionState.None)
+            State = CardInteractionState.Hover;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        isHovered = false;
-        transform.SetSiblingIndex(originalIndex);
-    }
-    private void CleanupDrag()
-    {
-        Destroy(aimIndicator);
-        aimIndicator = null;
-        //dragStarted = false;     
+        if (State == CardInteractionState.Hover)
+            State = CardInteractionState.None;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //
+        if (eventData.button == PointerEventData.InputButton.Left)
+            StartTargeting();
+
+        if (eventData.button == PointerEventData.InputButton.Right)
+            StartDragging();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!isDragging)
+        if (State == CardInteractionState.Targeting &&
+            eventData.button == PointerEventData.InputButton.Left)
         {
-            //dragStarted = false; 
-            if (cardData.effect.targetType == CardEffect.TargetType.None)
-                CardManager.Instance.UseInstantCard(this);
-            return;
+            ResolveTargeting();
         }
 
-        isDragging = false;
-
-        var type = cardData.effect.targetType;
-
-
-        if (type == CardEffect.TargetType.Tower)
+        if (State == CardInteractionState.Dragging &&
+            eventData.button == PointerEventData.InputButton.Right)
         {
-            Tower tower = CardManager.Instance.GetTowerUnderMouse();
-            if (tower != null)
-            {
-                CardManager.Instance.UseCardOnTower(this, tower);
-                CleanupDrag();
-                return;
-            }
+            StopDragging();
         }
-
-        CleanupDrag();
     }
 
-    public void OnDrag(PointerEventData eventData)
+
+
+    void StartTargeting()
     {
-        
+        State = CardInteractionState.Targeting;
+
+        GameObject go = Instantiate(
+            CardManager.Instance.aimPrefab,
+            transform.root
+        );
+
+        aim = go.GetComponent<CardAim>();
+        aim.startPoint = rect;
+        aim.SetStartPointPosition();
     }
 
+    void ResolveTargeting()
+    {
+        Tower tower = aim.StopAiming();
+
+        bool used = false;
+
+        switch (cardData.effect.targetType)
+        {
+            case CardEffect.TargetType.None:
+                used = CardManager.Instance.UseInstantCard(this);
+                break;
+
+            case CardEffect.TargetType.Tower:
+                if (tower != null)
+                    used = CardManager.Instance.UseCardOnTower(this, tower);
+                break;
+
+            case CardEffect.TargetType.Global:
+                used = CardManager.Instance.UseGlobalCard(this);
+                break;
+        }
+
+        if (!used)
+        {
+            State = CardInteractionState.None;
+        }
+
+        if (aim != null)
+        {
+            Destroy(aim.gameObject);
+            aim = null;
+        }
+    }
+
+
+
+    void StartDragging()
+    {
+        State = CardInteractionState.Dragging;
+    }
+
+    void StopDragging()
+    {
+        State = CardInteractionState.None;
+    }
 }

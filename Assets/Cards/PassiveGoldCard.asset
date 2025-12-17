@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Income+
   icon: {fileID: 5239431892560730751, guid: 3e7448413442e54418d8cf75c2020b56, type: 3}
-  description: Increases your gold income by 10
+  description: Increases your income by 10
   rarity: 0
   effect: {fileID: 11400000, guid: 89279e46e67182d47a9353cc9731f6c6, type: 2}

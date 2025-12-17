@@ -74,27 +74,38 @@ public class CardManager : MonoBehaviour
         return null;
     }
 
-    public void UseCardOnTower(CardUI cardUI, Tower tower)
+    public bool UseCardOnTower(CardUI cardUI, Tower tower)
     {
         var card = cardUI.cardData;
-        if (card?.effect != null)
-        {
-            card.effect.ApplyEffect(tower.gameObject);
-            Debug.Log($"U¿yto karty {card.cardName} na wie¿y {tower.name}");
-        }
-    }
+        if (card?.effect == null || tower == null)
+            return false;
 
-    public void UseGlobalCard(CardUI cardUI)
-    {
-        var card = cardUI.cardData;
-        card.effect.ApplyEffect(null);
-        Debug.Log($"Globalna karta {card.cardName} aktywowana");
+        card.effect.ApplyEffect(tower.gameObject);
+        RemoveCard(cardUI);
+        return true;
     }
-
-    public void UseInstantCard(CardUI cardUI)
+    public bool UseGlobalCard(CardUI cardUI)
     {
         var card = cardUI.cardData;
+        if (card?.effect == null)
+            return false;
+
         card.effect.ApplyEffect(null);
-        Debug.Log($"Natychmiastowa karta {card.cardName} aktywowana");
+        RemoveCard(cardUI);
+        return true;
+    }
+    public bool UseInstantCard(CardUI cardUI)
+    {
+        var card = cardUI.cardData;
+        if (card?.effect == null)
+            return false;
+
+        card.effect.ApplyEffect(null);
+        RemoveCard(cardUI);
+        return true;
+    }
+    public void RemoveCard(CardUI cardUI)
+    {
+        Destroy(cardUI.gameObject);
     }
 }
