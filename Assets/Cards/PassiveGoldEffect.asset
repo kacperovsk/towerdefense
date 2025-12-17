@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PassiveGoldEffect
   m_EditorClassIdentifier: Assembly-CSharp::PassiveGoldIncomeEffect
   targetType: 0
-  addAmount: 5
+  addAmount: 10

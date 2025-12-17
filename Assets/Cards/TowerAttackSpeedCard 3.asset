@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5047c8263a619f04ab58dc1590fa4131, type: 3}
-  m_Name: Test 3
+  m_Name: TowerAttackSpeedCard 3
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: DMGBuff1
+  cardName: EpicSpeed
   icon: {fileID: -3227111653731732067, guid: 855fd01e4698e39418dab452206a8550, type: 3}
-  description: buffs dmg by 1
-  rarity: 0
-  effect: {fileID: 0}
+  description: buffs Attack speed by 150%
+  rarity: 3
+  effect: {fileID: 11400000, guid: 4e5f9d0f84fd45d4e9027ddb90a4958b, type: 2}

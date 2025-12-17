@@ -91,6 +91,7 @@ MonoBehaviour:
   playerDamage: 0
   currentPlayerDamage: 0
   moneyValue: 100
+  data: {fileID: 11400000, guid: 8ef31baf2d46abf4c96fd09e8b86024c, type: 2}
 --- !u!212 &4941225622946099113
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -207,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871cc280c9d122a4a9f5be9280fb8515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  dodgeChance: 0.9
+  dodgeChance: 0.8
   moneyToSteal: 100
 --- !u!114 &-3282531473614202168
 MonoBehaviour:

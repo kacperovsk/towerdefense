@@ -1,6 +1,7 @@
 using System;
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class Enemy : MonoBehaviour
     //Wartości kasy dla wrogów, nie jestem pewien czy to potrzebne ale buja
     [Header("Reward")]
     [SerializeField] private int moneyValue = 10;
+    [Header("Drop")]
+    [SerializeField] private EnemyData data;
 
 
     public enum AuraStat
@@ -67,6 +70,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        TryDropCard();
         TrojanHorse trojan = GetComponent<TrojanHorse>();
         if (trojan != null)
         {
@@ -310,4 +314,57 @@ public class Enemy : MonoBehaviour
             temporarySlowMultiplier = maxSlow;
         }
     }
+
+    CardData.Rarity RollRarity(CardDropTable table)
+    {
+        float roll = UnityEngine.Random.Range(0f, 100f);
+        float cumulative = 0f;
+
+        foreach (var r in table.rarityChances)
+        {
+            cumulative += r.chance;
+            if (roll <= cumulative)
+                return r.rarity;
+        }
+
+        return CardData.Rarity.Common;
+    }
+    void TryDropCard()
+    {
+        if (data == null || data.dropTable == null)
+            return;
+
+        if (data.isBoss)
+        {
+            DropBossCard();
+
+            if (UnityEngine.Random.Range(0f, 100f) <= data.secondCardChance)
+            {
+                StartCoroutine(DropSecondBossCard());
+            }
+
+            return;
+        }
+
+        if (UnityEngine.Random.Range(0f, 100f) > data.dropTable.overallDropChance)
+            return;
+
+        CardData.Rarity rarity = RollRarity(data.dropTable);
+        CardManager.Instance.DropCardOfRarity(rarity);
+    }
+
+
+    void DropBossCard()
+    {
+        CardData.Rarity rarity = RollRarity(data.dropTable);
+        CardManager.Instance.DropCardOfRarity(rarity);
+    }
+
+    IEnumerator DropSecondBossCard()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        DropBossCard();
+    }
+
 }
