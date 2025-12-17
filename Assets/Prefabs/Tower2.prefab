@@ -115,7 +115,7 @@ MonoBehaviour:
   justPlaced: 0
   projectilePrefab: {fileID: 1483898852620040137, guid: 7eb47aee7aca1a94a9b4e09c82781db3, type: 3}
   shootPoint: {fileID: 5751366994624188520}
-  currentShotType: 1
+  currentShotType: 2
   sideShotAngle: 20
 --- !u!58 &3465177211175200618
 CircleCollider2D:

@@ -38,7 +38,8 @@ public class Tower : MonoBehaviour
     public enum ShotType
     {
         HomingTarget, // To jak po staremu
-        TripleFixedAngle // To do triple shot
+        TripleFixedAngle, // To do triple shot
+        SingleFixedPiercing // Do starego pierca
     }
     
     [Header("Shot Configuration")]
@@ -170,6 +171,10 @@ private void Shoot()
                 // Do triple shot
                 ShootTripleFixedAngle();
                 break;
+            
+            case ShotType.SingleFixedPiercing: // Do single piercing shota
+                ShootSingleFixed();
+                break;
         }
     }
 
@@ -197,7 +202,13 @@ private void Shoot()
 
         targetEnemy = null; 
     }
-    
+    private void ShootSingleFixed()
+    {
+        Vector3 targetPosition = targetEnemy.transform.position; 
+        InstantiateTripleShotProjectile(0f, targetPosition);
+
+        targetEnemy = null; 
+    }
     private void InstantiateTripleShotProjectile(float angleOffset, Vector3 targetPos)
     {
         GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
