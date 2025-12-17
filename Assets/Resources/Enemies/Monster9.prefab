@@ -90,6 +90,7 @@ MonoBehaviour:
   playerDamage: 25
   currentPlayerDamage: 25
   moneyValue: 30
+  data: {fileID: 11400000, guid: 963b11f8f3adaa143ae838f6a30cef5e, type: 2}
 --- !u!212 &4941225622946099113
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -239,6 +239,7 @@ MonoBehaviour:
   playerDamage: 3
   currentPlayerDamage: 3
   moneyValue: 3
+  data: {fileID: 11400000, guid: abfb2c1f9706c8c4dbcfd5b5dc51a3c5, type: 2}
 --- !u!50 &-1493451585095158151
 Rigidbody2D:
   serializedVersion: 5

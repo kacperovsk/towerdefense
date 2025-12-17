@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 5190739966368901424}
   - component: {fileID: 4149918833518601875}
   - component: {fileID: 2247034464999990732}
+  - component: {fileID: 1257458428460553571}
   m_Layer: 9
   m_Name: Special_Monster3
   m_TagString: Enemy
@@ -339,6 +340,7 @@ MonoBehaviour:
   playerDamage: 25
   currentPlayerDamage: 25
   moneyValue: 50
+  data: {fileID: 11400000, guid: bf0d842f0ab61ea4d913d2686bb1194e, type: 2}
 --- !u!212 &2247034464999990732
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -397,3 +399,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1257458428460553571
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661887283840240700}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.01, y: 0.5}
+    newSize: {x: 1.01, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.01, y: 0.5}
+  m_EdgeRadius: 0

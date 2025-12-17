@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "CardEffects/TowerAttackSpeed")]
 public class TowerAttackSpeedEffect : CardEffect
 {
-    public float addAmount = 0.5f;
+    public float addAmount = 1.2f;
 
     public override void ApplyEffect(GameObject target)
     {

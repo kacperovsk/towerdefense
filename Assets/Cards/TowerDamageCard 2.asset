@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5047c8263a619f04ab58dc1590fa4131, type: 3}
-  m_Name: TowerRangeCard
+  m_Name: TowerDamageCard 2
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Range+
-  icon: {fileID: -4774956387076314821, guid: fd373a7497d22704ebb0d23e86d9c9ea, type: 3}
-  description: buffs range by 0.5
-  rarity: 0
-  effect: {fileID: 11400000, guid: 0e0ff0fdee590fb40af50424700a8759, type: 2}
+  cardName: Damage+
+  icon: {fileID: 370836429328893637, guid: a9d3872039be1394d9e714a1ec29ca19, type: 3}
+  description: buffs damage by 100%
+  rarity: 1
+  effect: {fileID: 11400000, guid: 8dc6813ea5731af479a9179e8d4f9ebc, type: 2}

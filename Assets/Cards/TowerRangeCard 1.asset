@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5047c8263a619f04ab58dc1590fa4131, type: 3}
+  m_Name: TowerRangeCard 1
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Range+
+  icon: {fileID: 5153235128997989783, guid: e00855a902a8d3f4da2f6758baebf0b2, type: 3}
+  description: buffs range by 50%
+  rarity: 1
+  effect: {fileID: 11400000, guid: 0e0ff0fdee590fb40af50424700a8759, type: 2}

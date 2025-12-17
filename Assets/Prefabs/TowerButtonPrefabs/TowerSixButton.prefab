@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8511ba72de54e5b4182481a782d8443f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerButtonHover
-  towerPrefab: {fileID: -5763160565267067762, guid: 91a1788b554471646be604fefc50202f, type: 3}
+  buildingPrefab: {fileID: 2531838724052783978, guid: 91a1788b554471646be604fefc50202f, type: 3}
 --- !u!114 &4290712596748418326
 MonoBehaviour:
   m_ObjectHideFlags: 0

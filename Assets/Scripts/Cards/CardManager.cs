@@ -108,4 +108,23 @@ public class CardManager : MonoBehaviour
     {
         Destroy(cardUI.gameObject);
     }
+
+    public void DropCardOfRarity(CardData.Rarity rarity)
+    {
+        var pool = availableCards.FindAll(c => c.rarity == rarity);
+        if (pool.Count == 0) return;
+
+        CardData data = pool[Random.Range(0, pool.Count)];
+        SpawnCard(data);
+    }
+
+    void SpawnCard(CardData data)
+    {
+        GameObject newCard = Instantiate(cardPrefab, cardBar);
+        newCard.transform.localScale = Vector3.one;
+
+        newCard.GetComponent<CardView>().Setup(data);
+        newCard.GetComponent<CardUI>().cardData = data;
+    }
+
 }

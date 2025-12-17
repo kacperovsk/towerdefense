@@ -9,6 +9,7 @@ public struct TowerStats
     public float fireRate;
     public float range;
     public float cost;
+
     public TowerStats(Sprite icon, string name, float dmg, float rate, float rng, float cost_)
     {
         towerIcon = icon;
@@ -22,44 +23,51 @@ public struct TowerStats
 
 public class Tower : MonoBehaviour
 {
+    [Header("Basic Info")]
     [SerializeField] public Sprite towerIcon;
     [SerializeField] public string towerName;
     [SerializeField] public int cost;
 
+    [Header("Base Stats")]
     [SerializeField] private float range = 2f;
-    public float fireRate = 1f;
-    public float damage = 4f;
+    [SerializeField] private float fireRate = 1f;
+    [SerializeField] private float damage = 4f;
 
     [HideInInspector] public bool isGhost = false;
     [HideInInspector] public bool justPlaced = false;
 
+    [Header("Shooting")]
     [SerializeField] private GameObject projectilePrefab;
     public Transform shootPoint;
+
     public enum ShotType
     {
-        HomingTarget, // To jak po staremu
-        TripleFixedAngle, // To do triple shot
-        SingleFixedPiercing // Do starego pierca
+        HomingTarget,
+        TripleFixedAngle,
+        SingleFixedPiercing
     }
-    
+
     [Header("Shot Configuration")]
-    [SerializeField] private ShotType currentShotType = ShotType.HomingTarget; 
+    [SerializeField] private ShotType currentShotType = ShotType.HomingTarget;
     [SerializeField] private float sideShotAngle = 20f;
 
-    private LineRenderer rangeCircle;
-    private bool showRange;
-
-    private float fireCountdown = 0f;
+    private float fireCountdown;
     private Enemy targetEnemy;
 
-    // Bazowe statystyki publiczne do odczytu przez buffy
     public float baseDamage { get; private set; }
     public float baseFireRate { get; private set; }
+    public float baseRange { get; private set; }
 
-    private float buffMultiplierTotal = 1f;
+    private float damageMultiplier = 0f;
+    private float fireRateMultiplier = 0f;
+    private float rangeMultiplier = 0f;
+
+    protected LineRenderer rangeCircle;
+    protected bool showRange;
 
     private SpriteRenderer sr;
     private Color originalColor;
+    public bool IsShowingRange() => showRange;
 
     private void Awake()
     {
@@ -68,67 +76,81 @@ public class Tower : MonoBehaviour
 
         baseDamage = damage;
         baseFireRate = fireRate;
+        baseRange = range;
 
-        if (rangeCircle == null)
-        {
-            rangeCircle = gameObject.AddComponent<LineRenderer>();
-            rangeCircle.loop = true;
-            rangeCircle.positionCount = 50;
-            rangeCircle.material = new Material(Shader.Find("Sprites/Default"));
-            rangeCircle.startWidth = 0.02f;
-            rangeCircle.endWidth = 0.02f;
-            rangeCircle.startColor = Color.grey;
-            rangeCircle.endColor = Color.grey;
-            rangeCircle.enabled = false;
-            rangeCircle.sortingOrder = 2;
-        }
+        RecalculateStats();
+        SetupRangeCircle();
     }
 
-    void Update()
+    private void Update()
     {
         UpdateTarget();
 
         if (showRange)
             DrawRangeCircle(range);
 
-        if (isGhost || targetEnemy == null) return;
+        if (isGhost || targetEnemy == null)
+            return;
+
+        fireCountdown -= Time.deltaTime;
 
         if (fireCountdown <= 0f)
         {
             Shoot();
             fireCountdown = 1f / fireRate;
         }
-        fireCountdown -= Time.deltaTime;
-    }
-    public void Highlight()
-    {
-        sr.color = Color.yellow;
     }
 
-    public void Unhighlight()
+
+    public void ApplyDamageBuff(float multiplier)
     {
-        sr.color = originalColor;
+        damageMultiplier += multiplier - 1f;
+        RecalculateStats();
     }
 
-    public void ApplyCardDamageBuff(float value)
+    public void ApplyAttackSpeedBuff(float multiplier)
     {
-        damage += value;
-        Debug.Log($"{name} otrzymała buff damage +{value}");
+        fireRateMultiplier += multiplier - 1f;
+        RecalculateStats();
     }
-    public void ApplyAttackSpeedBuff(float value)
+
+    public void ApplyRangeBuff(float multiplier)
     {
-        fireRate += value;
+        rangeMultiplier += multiplier - 1f;
+        RecalculateStats();
     }
-    public void ApplyRangeBuff(float value)
+
+    public void RemoveDamageBuff(float multiplier)
     {
-        range += value;
+        damageMultiplier /= multiplier - 1f;
+        RecalculateStats();
     }
+
+    public void RemoveAttackSpeedBuff(float multiplier)
+    {
+        fireRateMultiplier /= multiplier - 1f;
+        RecalculateStats();
+    }
+
+    public void RemoveRangeBuff(float multiplier)
+    {
+        rangeMultiplier /= multiplier - 1f;
+        RecalculateStats();
+    }
+
+    private void RecalculateStats()
+    {
+        damage = baseDamage * (1f + damageMultiplier);
+        fireRate = baseFireRate * (1f + fireRateMultiplier);
+        range = baseRange * (1f + rangeMultiplier);
+    }
+
 
     private void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        Enemy furthestEnemy = null;
+        Enemy bestEnemy = null;
         float maxProgress = -1f;
         float closestDistance = Mathf.Infinity;
 
@@ -139,167 +161,141 @@ public class Tower : MonoBehaviour
             Enemy enemy = enemyObj.GetComponent<Enemy>();
             if (enemy == null) continue;
 
-            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy > range) continue;
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distance > range) continue;
 
             float progress = enemy.GetProgress();
 
-            if (progress > maxProgress || (Mathf.Approximately(progress, maxProgress) && distanceToEnemy < closestDistance))
+            if (progress > maxProgress ||
+                (Mathf.Approximately(progress, maxProgress) && distance < closestDistance))
             {
                 maxProgress = progress;
-                closestDistance = distanceToEnemy;
-                furthestEnemy = enemy;
+                closestDistance = distance;
+                bestEnemy = enemy;
             }
         }
 
-        targetEnemy = furthestEnemy;
+        targetEnemy = bestEnemy;
     }
 
-private void Shoot()
+
+    private void Shoot()
     {
-        fireCountdown = 1f / fireRate;
-        
-        // Do przestawiania typu pocisku
         switch (currentShotType)
         {
             case ShotType.HomingTarget:
-                // Do klasycznego homingu
                 ShootHoming();
                 break;
-            
+
             case ShotType.TripleFixedAngle:
-                // Do triple shot
                 ShootTripleFixedAngle();
                 break;
-            
-            case ShotType.SingleFixedPiercing: // Do single piercing shota
+
+            case ShotType.SingleFixedPiercing:
                 ShootSingleFixed();
                 break;
         }
     }
 
-    // Metoda stara
     private void ShootHoming()
     {
         GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
-        Projectile projectile = projectileGO.GetComponent<Projectile>();
-
-        if (projectile != null)
-        {
-            projectile.SetTarget(targetEnemy, damage);
-        }
+        projectileGO.GetComponent<Projectile>()?.SetTarget(targetEnemy, damage);
     }
-    // Logika triple shot
+
     private void ShootTripleFixedAngle()
     {
-        // Pocisk centralny
-        Vector3 targetPosition = targetEnemy.transform.position; 
-        InstantiateTripleShotProjectile(0f, targetPosition);
+        Vector3 targetPos = targetEnemy.transform.position;
 
-        // Pociski boczne
-        InstantiateTripleShotProjectile(-sideShotAngle, Vector3.zero); // Lewy
-        InstantiateTripleShotProjectile(sideShotAngle, Vector3.zero);  // Prawy
+        InstantiateTripleShotProjectile(0f, targetPos);
+        InstantiateTripleShotProjectile(-sideShotAngle, Vector3.zero);
+        InstantiateTripleShotProjectile(sideShotAngle, Vector3.zero);
 
-        targetEnemy = null; 
+        targetEnemy = null;
     }
+
     private void ShootSingleFixed()
     {
-        Vector3 targetPosition = targetEnemy.transform.position; 
-        InstantiateTripleShotProjectile(0f, targetPosition);
-
-        targetEnemy = null; 
+        InstantiateTripleShotProjectile(0f, targetEnemy.transform.position);
+        targetEnemy = null;
     }
+
     private void InstantiateTripleShotProjectile(float angleOffset, Vector3 targetPos)
     {
         GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
-        
-        // Korzysta z FixedPiercing aby mieć ten prosty lot bez homing
-        FixedPiercingBehaviour fixedPierce = projectileGO.GetComponent<FixedPiercingBehaviour>();
-        
-        if (fixedPierce != null)
+        FixedPiercingBehaviour pierce = projectileGO.GetComponent<FixedPiercingBehaviour>();
+
+        if (pierce == null)
         {
-            // dmg
-            projectileGO.GetComponent<Projectile>().SetDamage(damage);
+            Destroy(projectileGO);
+            return;
+        }
 
-            // strzał centralny celuje
-            if (targetPos != Vector3.zero)
-            {
-                // strzał
-                fixedPierce.Initialize(shootPoint.position, targetPos);
-            }
-            else
-            {
-                // Strzały boczne (nie celują).
-                
-                // Kierunek na podstawie obrotu wieży
-                Quaternion rotation = Quaternion.Euler(0, 0, angleOffset);
-                Vector2 fixedDirection = rotation * shootPoint.up;
-                
-                // Tworzy odległy ceł w tym kierunku (rozwiązanie z neta)
-                Vector3 virtualTarget = shootPoint.position + (Vector3)fixedDirection * 100f; 
+        projectileGO.GetComponent<Projectile>()?.SetDamage(damage);
 
-                // Strzela
-                fixedPierce.Initialize(shootPoint.position, virtualTarget);
-            }
+        if (targetPos != Vector3.zero)
+        {
+            pierce.Initialize(shootPoint.position, targetPos);
         }
         else
         {
-            Destroy(projectileGO);
+            Vector2 dir = Quaternion.Euler(0, 0, angleOffset) * shootPoint.up;
+            pierce.Initialize(shootPoint.position, shootPoint.position + (Vector3)dir * 100f);
         }
     }
 
-    public TowerStats GetStats()
+
+    private void SetupRangeCircle()
     {
-        return new TowerStats(towerIcon, towerName, damage, fireRate, range, cost);
+        rangeCircle = gameObject.AddComponent<LineRenderer>();
+        rangeCircle.loop = true;
+        rangeCircle.positionCount = 50;
+        rangeCircle.material = new Material(Shader.Find("Sprites/Default"));
+        rangeCircle.startWidth = 0.02f;
+        rangeCircle.endWidth = 0.02f;
+        rangeCircle.startColor = Color.grey;
+        rangeCircle.endColor = Color.grey;
+        rangeCircle.enabled = false;
+        rangeCircle.sortingOrder = 2;
     }
 
     public void ShowRange()
     {
         showRange = true;
-        if (rangeCircle != null) rangeCircle.enabled = true;
+        rangeCircle.enabled = true;
     }
 
     public void HideRange()
     {
         showRange = false;
-        if (rangeCircle != null) rangeCircle.enabled = false;
+        rangeCircle.enabled = false;
     }
 
-    public void ApplyBuff(float multiplier)
+    public void DrawRangeCircle(float radius)
     {
-        buffMultiplierTotal *= multiplier;
-        UpdateStats();
-    }
-
-    public void RemoveBuff(float multiplier)
-    {
-        buffMultiplierTotal /= multiplier;
-        UpdateStats();
-    }
-
-    private void UpdateStats()
-    {
-        damage = baseDamage * buffMultiplierTotal;
-        fireRate = baseFireRate * buffMultiplierTotal;
-    }
-
-    // Range dla karczm się pierdolił więc dodałem gettery żeby bezpośrednio u nich w skrypcie zrobić range, fml
-    public float GetRange() => range;
-
-    public bool IsShowingRange() => showRange;
-
-    public LineRenderer GetRangeCircle() => rangeCircle;
-
-    // Metoda też do tego
-    public void DrawRangeCircle(float customRadius)
-    {
-        if (!showRange || rangeCircle == null) return;
+        if (!showRange) return;
 
         for (int i = 0; i < rangeCircle.positionCount; i++)
         {
             float angle = 2 * Mathf.PI * i / rangeCircle.positionCount;
-            Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * customRadius;
+            Vector3 pos = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
             rangeCircle.SetPosition(i, transform.position + pos);
         }
+    }
+    public void Highlight()
+    {
+        if (sr != null)
+            sr.color = Color.yellow;
+    }
+
+    public void Unhighlight()
+    {
+        if (sr != null)
+            sr.color = originalColor;
+    }
+
+    public TowerStats GetStats()
+    {
+        return new TowerStats(towerIcon, towerName, damage, fireRate, range, cost);
     }
 }

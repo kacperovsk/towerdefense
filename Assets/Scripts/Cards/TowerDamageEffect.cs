@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "CardEffects/TowerDamage")]
 public class TowerDamageEffect : CardEffect
 {
-    public float addAmount = 2.0f;
+    public float addAmount = 1.2f;
 
     private void OnEnable()
     {
@@ -15,7 +15,7 @@ public class TowerDamageEffect : CardEffect
         Tower tower = target.GetComponent<Tower>();
         if (tower != null)
         {
-            tower.ApplyCardDamageBuff(addAmount);
+            tower.ApplyDamageBuff(addAmount);
         }
     }
 }
