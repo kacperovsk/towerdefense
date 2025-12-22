@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -7371822249899153996, guid: f0b8bc630e4951d4590275021d690b96, type: 3}
-  towerName: Catapult Tower
+  towerName: Catapult
   cost: 400
   range: 5
   fireRate: 0.25
@@ -115,6 +115,8 @@ MonoBehaviour:
   justPlaced: 0
   projectilePrefab: {fileID: 1483898852620040137, guid: 1aa4aab574d952e46bb7cb5c3bd5f61c, type: 3}
   shootPoint: {fileID: 5751366994624188520}
+  currentShotType: 0
+  sideShotAngle: 20
 --- !u!58 &3465177211175200618
 CircleCollider2D:
   m_ObjectHideFlags: 0

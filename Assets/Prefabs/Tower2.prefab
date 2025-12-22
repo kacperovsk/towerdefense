@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: 5559667929427957976, guid: 37f5270afa7026643893ae612a5e469b, type: 3}
-  towerName: Crossbow Tower
+  towerName: Crossbow
   cost: 100
   range: 2.5
   fireRate: 0.8

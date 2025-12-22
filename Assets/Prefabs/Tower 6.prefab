@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -8856243882942313048, guid: 0fc723611911c814483a7164bc1af054, type: 3}
-  towerName: Archer Tower
+  towerName: Ballista
   cost: 250
   range: 5
   fireRate: 0.75
