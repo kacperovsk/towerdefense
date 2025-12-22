@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Speed++
   icon: {fileID: -3227111653731732067, guid: 855fd01e4698e39418dab452206a8550, type: 3}
-  description: buffs Attack speed by 100%
-  rarity: 2
+  description: Buffs base Attack speed by 50%
+  rarity: 1
   effect: {fileID: 11400000, guid: 35555e91c960ff5428cc3239de35cc2b, type: 2}

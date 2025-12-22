@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5047c8263a619f04ab58dc1590fa4131, type: 3}
-  m_Name: TowerDamageCard 1
+  m_Name: TowerAttackSpeedCard 5
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Damage+
-  icon: {fileID: 370836429328893637, guid: a9d3872039be1394d9e714a1ec29ca19, type: 3}
-  description: Buffs base damage by 25%
-  rarity: 0
-  effect: {fileID: 11400000, guid: 9da404148b90f3042be07133bdb6fdfd, type: 2}
+  cardName: UltraSpeed
+  icon: {fileID: -3227111653731732067, guid: 855fd01e4698e39418dab452206a8550, type: 3}
+  description: Buffs base Attack speed by 150%
+  rarity: 4
+  effect: {fileID: 11400000, guid: 52b6db706a309bb4e840bfe80f94f026, type: 2}

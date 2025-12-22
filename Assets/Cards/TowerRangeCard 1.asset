@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Range+
   icon: {fileID: 5153235128997989783, guid: e00855a902a8d3f4da2f6758baebf0b2, type: 3}
-  description: buffs range by 50%
-  rarity: 1
+  description: Buffs base range by 25%
+  rarity: 0
   effect: {fileID: 11400000, guid: 0e0ff0fdee590fb40af50424700a8759, type: 2}

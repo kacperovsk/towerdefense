@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fafc82598097bbc428494bda1a7360a6, type: 3}
-  m_Name: TowerRangeEffect 3
-  m_EditorClassIdentifier: Assembly-CSharp::TowerRangeEffect
+  m_Script: {fileID: 11500000, guid: 1838f81904e17414495af590eacf5d6e, type: 3}
+  m_Name: TowerAttackSpeedEffect 5
+  m_EditorClassIdentifier: Assembly-CSharp::TowerAttackSpeedEffect
   targetType: 1
-  addAmount: 1.75
+  addAmount: 2.5

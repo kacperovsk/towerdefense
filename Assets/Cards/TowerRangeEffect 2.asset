@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TowerRangeEffect 2
   m_EditorClassIdentifier: Assembly-CSharp::TowerRangeEffect
   targetType: 1
-  addAmount: 2
+  addAmount: 1.5
