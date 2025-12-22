@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4941225622946099113}
   - component: {fileID: -4736710905737021109}
   - component: {fileID: 3082915570617188544}
+  - component: {fileID: -2458060856051533717}
   m_Layer: 9
   m_Name: Monster5
   m_TagString: Enemy
@@ -209,6 +210,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBuffIcons
   iconAnchor: {fileID: 3840305817537131095}
   iconPrefab: {fileID: 4378352395072981262}
+--- !u!50 &-2458060856051533717
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773017103562806699}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &8809360653349017035
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5047c8263a619f04ab58dc1590fa4131, type: 3}
   m_Name: TowerDamageCard 3
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: EpicDamage
+  cardName: SuperDamage
   icon: {fileID: 370836429328893637, guid: a9d3872039be1394d9e714a1ec29ca19, type: 3}
-  description: buffs damage by 150%
-  rarity: 3
+  description: Buffs base damage by 75%
+  rarity: 2
   effect: {fileID: 11400000, guid: 1b7efc7cb9285724bad32dfa4868fd62, type: 2}

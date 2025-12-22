@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,6 +18,17 @@ public class CardUI : MonoBehaviour,
 
     private Vector3 originalScale;
     private CardAim aim;
+
+    [Header("Preview")]
+    public float previewScale = 3.0f;
+    private bool previewActive;
+    private GameObject previewInstance;
+    private Canvas rootCanvas;
+    [Header("Preview Animation")]
+    public float previewAnimTime = 0.15f;
+    private RectTransform previewVisual;
+
+
 
     public enum CardInteractionState
     {
@@ -39,28 +51,64 @@ public class CardUI : MonoBehaviour,
     private void Awake()
     {
         originalScale = rect.localScale;
+        rootCanvas = GetComponentInParent<Canvas>().rootCanvas;
     }
 
     private void Update()
     {
+        if (previewActive && !Input.GetMouseButton(1))
+        {
+            HidePreview();
+            return;
+        }
+
+        if (previewActive && previewVisual != null)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                previewVisual,
+                Input.mousePosition,
+                null,
+                out Vector2 localMouse
+            );
+
+            Vector2 normalized = localMouse / (previewVisual.rect.size * 0.5f);
+            normalized = Vector2.ClampMagnitude(normalized, 1f);
+
+            float tiltStrength = 12f;
+
+            Quaternion targetRot = Quaternion.Euler(
+                -normalized.y * tiltStrength,
+                 normalized.x * tiltStrength,
+                0
+            );
+
+            previewVisual.localRotation = Quaternion.Lerp(
+                previewVisual.localRotation,
+                targetRot,
+                Time.deltaTime * 10f
+            );
+
+            Vector3 targetPos = new Vector3(
+                normalized.x * 12f,
+                normalized.y * 12f,
+                0
+            );
+
+            previewVisual.localPosition = Vector3.Lerp(
+                previewVisual.localPosition,
+                targetPos,
+                Time.deltaTime * 10f
+            );
+        }
+
         Vector3 targetScale = IsHovered ? originalScale * hoverScale : originalScale;
         rect.localScale = Vector3.Lerp(
             rect.localScale,
             targetScale,
             Time.deltaTime * animationSpeed
         );
-
-        if (State == CardInteractionState.Dragging)
-        {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                rect.parent as RectTransform,
-                Input.mousePosition,
-                null,
-                out Vector2 localPos
-            );
-            rect.localPosition = localPos;
-        }
     }
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -79,8 +127,10 @@ public class CardUI : MonoBehaviour,
         if (eventData.button == PointerEventData.InputButton.Left)
             StartTargeting();
 
+        if (previewActive)
+            return;
         if (eventData.button == PointerEventData.InputButton.Right)
-            StartDragging();
+            ShowPreview();
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -89,12 +139,6 @@ public class CardUI : MonoBehaviour,
             eventData.button == PointerEventData.InputButton.Left)
         {
             ResolveTargeting();
-        }
-
-        if (State == CardInteractionState.Dragging &&
-            eventData.button == PointerEventData.InputButton.Right)
-        {
-            StopDragging();
         }
     }
 
@@ -147,16 +191,79 @@ public class CardUI : MonoBehaviour,
             aim = null;
         }
     }
-
-
-
-    void StartDragging()
+    void ShowPreview()
     {
-        State = CardInteractionState.Dragging;
+        if (previewInstance != null) return;
+
+        previewActive = true;
+
+        previewInstance = Instantiate(gameObject, rootCanvas.transform);
+        Destroy(previewInstance.GetComponent<CardUI>());
+
+        RectTransform r = previewInstance.GetComponent<RectTransform>();
+        r.anchorMin = r.anchorMax = new Vector2(0.5f, 0.5f);
+        r.anchoredPosition = Vector2.zero;
+        r.localScale = Vector3.zero;
+        StartCoroutine(AnimatePreviewIn(r, originalScale * previewScale));
+        r.SetAsLastSibling();
+
+        previewVisual = previewInstance
+            .GetComponentInChildren<Image>()
+            .rectTransform;
+
+        previewVisual.localRotation = Quaternion.identity;
+        previewVisual.localPosition = Vector3.zero;
     }
 
-    void StopDragging()
+    void HidePreview()
     {
-        State = CardInteractionState.None;
+        if (!previewActive)
+            return;
+
+        previewActive = false;
+
+        if (previewInstance != null)
+        {
+            StartCoroutine(FadeAndDestroy(previewInstance));
+            previewInstance = null;
+            previewVisual = null;
+        }
     }
+    IEnumerator AnimatePreviewIn(RectTransform r, Vector3 target)
+    {
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.unscaledDeltaTime / previewAnimTime;
+            float eased = Mathf.SmoothStep(0, 1, t);
+            r.localScale = Vector3.LerpUnclamped(Vector3.zero, target, eased);
+            yield return null;
+        }
+        r.localScale = target;
+    }
+    IEnumerator FadeAndDestroy(GameObject obj)
+    {
+        if (obj == null) yield break;
+
+        CanvasGroup cg = obj.GetComponent<CanvasGroup>();
+        if (cg == null)
+            cg = obj.AddComponent<CanvasGroup>();
+
+        float t = 1f;
+
+        while (t > 0f)
+        {
+            if (obj == null || cg == null)
+                yield break;
+
+            t -= Time.unscaledDeltaTime / 0.12f;
+            cg.alpha = t;
+            yield return null;
+        }
+
+        if (obj != null)
+            Destroy(obj);
+    }
+
+
 }

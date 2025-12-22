@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TowerDamageEffect 3
   m_EditorClassIdentifier: Assembly-CSharp::TowerDamageEffect
   targetType: 1
-  addAmount: 2.5
+  addAmount: 1.75

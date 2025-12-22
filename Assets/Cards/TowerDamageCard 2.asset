@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Damage+
   icon: {fileID: 370836429328893637, guid: a9d3872039be1394d9e714a1ec29ca19, type: 3}
-  description: buffs damage by 100%
+  description: Buffs base damage by 50%
   rarity: 1
   effect: {fileID: 11400000, guid: 8dc6813ea5731af479a9179e8d4f9ebc, type: 2}

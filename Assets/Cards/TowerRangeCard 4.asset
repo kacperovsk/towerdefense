@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5047c8263a619f04ab58dc1590fa4131, type: 3}
   m_Name: TowerRangeCard 4
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: UltraRange
+  cardName: EpicRange
   icon: {fileID: 5153235128997989783, guid: e00855a902a8d3f4da2f6758baebf0b2, type: 3}
-  description: buffs range by 200%
-  rarity: 4
+  description: Buffs base range by 100%
+  rarity: 3
   effect: {fileID: 11400000, guid: 9a1e0e290716d6d4cafa1df54d8d462d, type: 2}

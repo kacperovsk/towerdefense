@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TowerAttackSpeedEffect 4
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttackSpeedEffect
   targetType: 1
-  addAmount: 3
+  addAmount: 2
