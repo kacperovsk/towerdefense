@@ -86,6 +86,14 @@ public class Tower : MonoBehaviour
     {
         UpdateTarget();
 
+        //== OBRACANIE, JAK CHCEMY TO ODKOEMNTOWAC.
+        //if (targetEnemy != null)
+        //{
+        //    Vector2 dir = targetEnemy.transform.position - transform.position;
+        //    float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //    transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+        //}
+
         if (showRange)
             DrawRangeCircle(range);
 
@@ -205,13 +213,11 @@ public class Tower : MonoBehaviour
 
     private void ShootTripleFixedAngle()
     {
-        Vector3 targetPos = targetEnemy.transform.position;
+        Vector2 baseDir = (targetEnemy.transform.position - shootPoint.position).normalized;
 
-        InstantiateTripleShotProjectile(0f, targetPos);
-        InstantiateTripleShotProjectile(-sideShotAngle, Vector3.zero);
-        InstantiateTripleShotProjectile(sideShotAngle, Vector3.zero);
-
-        targetEnemy = null;
+        ShootFixed(baseDir, 0f);
+        ShootFixed(baseDir, -sideShotAngle);
+        ShootFixed(baseDir, sideShotAngle);
     }
 
     private void ShootSingleFixed()
@@ -243,6 +249,18 @@ public class Tower : MonoBehaviour
             pierce.Initialize(shootPoint.position, shootPoint.position + (Vector3)dir * 100f);
         }
     }
+
+    private void ShootFixed(Vector2 baseDir, float angle)
+    {
+        GameObject projectileGO = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
+
+        Projectile proj = projectileGO.GetComponent<Projectile>();
+        proj.SetDamage(damage);
+
+        Vector2 finalDir = Quaternion.Euler(0, 0, angle) * baseDir;
+        proj.ActivateFixedStraight(finalDir, 5f);
+    }
+
 
 
     private void SetupRangeCircle()

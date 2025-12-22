@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -3918393090873308021, guid: 350f74a97d3ae624da799bd8915f9b56, type: 3}
-  towerName: Archer Tower
+  towerName: Tar Thrower
   cost: 75
   range: 2
   fireRate: 1
@@ -115,6 +115,8 @@ MonoBehaviour:
   justPlaced: 0
   projectilePrefab: {fileID: 3342686595875523168, guid: f99a236f535710149a94260973172bc6, type: 3}
   shootPoint: {fileID: 5751366994624188520}
+  currentShotType: 0
+  sideShotAngle: 20
 --- !u!58 &3465177211175200618
 CircleCollider2D:
   m_ObjectHideFlags: 0

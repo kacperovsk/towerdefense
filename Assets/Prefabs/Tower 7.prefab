@@ -106,10 +106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -4449096663592872670, guid: 3bd750b14ecbaaf4b9bfaf2b3d39bf86, type: 3}
-  towerName: Archer Tower
-  cost: 75
-  range: 5
-  fireRate: 1
+  towerName: Trebuchet
+  cost: 200
+  range: 3.5
+  fireRate: 0.7
   damage: 4
   isGhost: 0
   justPlaced: 0

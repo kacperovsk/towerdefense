@@ -1,6 +1,7 @@
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -42,7 +43,15 @@ public class LevelSelectorController : MonoBehaviour
         LoadUnlocked();
         LoadNext();
     }
-    
+
+    private void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
     public void GoRightButton()
     {
         currentMap++;
