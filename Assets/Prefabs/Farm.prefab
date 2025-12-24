@@ -115,7 +115,9 @@ MonoBehaviour:
   justPlaced: 0
   projectilePrefab: {fileID: 0}
   shootPoint: {fileID: 0}
-  goldPerWave: 25
+  currentShotType: 0
+  sideShotAngle: 20
+  goldPerWave: 50
 --- !u!61 &1551183063598298544
 BoxCollider2D:
   m_ObjectHideFlags: 0

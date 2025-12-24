@@ -7,17 +7,38 @@ public class MainMenuController : MonoBehaviour
 {
     public GameObject optionsPanel;
     public Toggle autoStartToggle;
+    public Slider musicSlider;
+
 
     private void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
+            CancelOptions();
             optionsPanel.SetActive(false);
         }
     }
+    private void Start()
+    {
+        bool autoStart = PlayerPrefs.GetInt("AutoStartNextWave", 0) == 1;
+        autoStartToggle.SetIsOnWithoutNotify(autoStart);
+
+        if (musicSlider != null && MusicManager.Instance != null)
+        {
+            // Pobierz aktualn¹ g³oœnoœæ z MusicManager
+            float currentVolume = MusicManager.Instance.source.volume;
+            musicSlider.SetValueWithoutNotify(currentVolume);
+
+            // Listener
+            musicSlider.onValueChanged.AddListener(value =>
+            {
+                MusicManager.Instance.SetVolume(value); // zmiana na ¿ywo
+            });
+        }
+    }
+
     public void StartGame()
     {
-        // Tymczasowe, potem do zastapienia jakims wyborem map.
         SceneManager.LoadScene("LevelSelector");
     }
 
@@ -33,10 +54,28 @@ public class MainMenuController : MonoBehaviour
 
     public void ConfirmOptions()
     {
-        // do implementacji
+        PlayerPrefs.SetInt("AutoStartNextWave", autoStartToggle.isOn ? 1 : 0);
+        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+
+        PlayerPrefs.Save();
+        MusicManager.Instance.SetVolume(musicSlider.value);
+        optionsPanel.SetActive(false);
     }
     public void CancelOptions()
     {
+        float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+
+        musicSlider.SetValueWithoutNotify(savedVolume);
+        AudioListener.volume = savedVolume;
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.SetVolume(savedVolume);
+
         optionsPanel.SetActive(false);
+    }
+
+    public void OnMusicVolumeChanged()
+    {
+        MusicManager.Instance.SetVolume(musicSlider.value);
     }
 }
