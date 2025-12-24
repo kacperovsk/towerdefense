@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,6 +20,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerLife = 100;
     public TextMeshProUGUI LicznikŻycia;
 
+    [Header("InfoTexts")]
+    public TextMeshProUGUI placementText;
+    public TextMeshProUGUI bossSpawnText;
+    public TextMeshProUGUI goldText;
+
+    [Header("UI")]
+    public Slider musicSlider;
+    public Toggle autoStartToggle;
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -37,10 +47,43 @@ public class GameManager : MonoBehaviour
         {
             TogglePause();
         }
+
+        if(isPlacing)
+            placementText.gameObject.SetActive(true);
+        else
+            placementText.gameObject.SetActive(false);
+
+        goldText.text = "Gold per wave: " + passiveGoldIncome;
     }
 
     private void Start()
     {
+        // Muzyka
+        if (musicSlider != null && MusicManager.Instance != null)
+        {
+            musicSlider.SetValueWithoutNotify(MusicManager.Instance.source.volume);
+
+            musicSlider.onValueChanged.AddListener(value =>
+            {
+                MusicManager.Instance.SetVolume(value); // zmiana na żywo
+                PlayerPrefs.SetFloat("MusicVolume", value); // zapis do prefs zawsze
+                PlayerPrefs.Save();
+            });
+        }
+
+        // Toggle autostartu
+        if (autoStartToggle != null)
+        {
+            bool autoStart = PlayerPrefs.GetInt("AutoStartNextWave", 0) == 1;
+            autoStartToggle.SetIsOnWithoutNotify(autoStart);
+
+            autoStartToggle.onValueChanged.AddListener(value =>
+            {
+                PlayerPrefs.SetInt("AutoStartNextWave", value ? 1 : 0);
+                PlayerPrefs.Save();
+            });
+        }
+
         UpdateLifeUI();
         UpdateMoneyUI();
     }
@@ -160,15 +203,15 @@ public class GameManager : MonoBehaviour
         ConfirmationMenu.Instance.Show(() =>
         {
             Time.timeScale = 1f;
-            //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);   // podobno resetuje scene przy okazji zmienienia na inna.
             SceneManager.LoadScene("MainMenu");   // Wylaczone do testow.
+            PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+            PlayerPrefs.Save();
         });
     }
 
     public void GoToMenuNoConfirm()
     {
             Time.timeScale = 1f;
-            //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);   // podobno resetuje scene przy okazji zmienienia na inna.
             SceneManager.LoadScene("MainMenu");   // Wylaczone do testow.
     }
 
@@ -183,6 +226,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         winPanel.SetActive(true);
 
+        scoreText.gameObject.SetActive(true);
+        highscoreText.gameObject.SetActive(true);
 
         int finalScore = CalculateScore();
         string sceneName = SceneManager.GetActiveScene().name;
@@ -192,12 +237,12 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt(sceneName + "_Highscore", finalScore);
             PlayerPrefs.Save();
-            Debug.Log($"Nowy najwyższy wynik dla {sceneName}: {finalScore}");
         }
 
         if (scoreText != null)
-            scoreText.text = $"Wynik: {finalScore}";
-
+            scoreText.text = $"Score: {finalScore}";
+        if (highscoreText != null)
+            highscoreText.text = $"Highscore: {PlayerPrefs.GetInt(sceneName + "_Highscore", 0)}";
         UnlockNextMap();
     }
 
@@ -206,24 +251,25 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         losePanel.SetActive(true);
 
+        scoreText.gameObject.SetActive(true);
+        highscoreText.gameObject.SetActive(true);
+
         int finalScore = CalculateScore();
         finalScore = finalScore / 2;    // na przegranej jest 0.5x pktow
         string sceneName = SceneManager.GetActiveScene().name;
 
         int currentHighscore = PlayerPrefs.GetInt(sceneName + "_Highscore", 0);
-        Debug.Log($"Current highscore: {currentHighscore}");
-        Debug.Log($"Current score: {finalScore}");
-        Debug.Log($"Enemies defeated: {totalEnemiesDefeated}");
+
         if (finalScore > currentHighscore)
         {
             PlayerPrefs.SetInt(sceneName + "_Highscore", finalScore);
             PlayerPrefs.Save();
-            Debug.Log($"Nowy najwyższy wynik dla {sceneName}: {finalScore}");
         }
 
         if (scoreText != null)
-            scoreText.text = $"Wynik: {finalScore}";
-
+            scoreText.text = $"Score: {finalScore}";
+        if (highscoreText != null)
+            highscoreText.text = $"Highscore: {PlayerPrefs.GetInt(sceneName + "_Highscore", 0)}";
     }
 
     private void UnlockNextMap()
@@ -252,6 +298,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Score")]
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highscoreText;
     private int totalEnemiesDefeated = 0;
 
     public void RegisterEnemyDefeat()
@@ -262,5 +309,36 @@ public class GameManager : MonoBehaviour
     public int CalculateScore()
     {
         return (totalEnemiesDefeated * 5) + (playerLife * 10);
+    }
+
+    public void BossAnnouncement()
+    {
+        if (bossSpawnText == null) return;
+
+        StopCoroutine("BossAnnouncementCoroutine"); // zatrzymanie poprzedniego komunikatu, jeśli jest
+        StartCoroutine(BossAnnouncementCoroutine());
+    }
+
+    private IEnumerator BossAnnouncementCoroutine()
+    {
+        bossSpawnText.gameObject.SetActive(true);
+        bossSpawnText.alpha = 1f;
+
+        float displayTime = 3f;    // czas wyświetlania przed fade
+        float fadeDuration = 1f;   // czas wygaszania
+
+        // Czekaj przez displayTime sekund
+        yield return new WaitForSeconds(displayTime);
+
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            bossSpawnText.alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            yield return null;
+        }
+
+        bossSpawnText.alpha = 0f;
+        bossSpawnText.gameObject.SetActive(false);
     }
 }

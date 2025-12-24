@@ -34,11 +34,6 @@ public class TowerClickHandler : MonoBehaviour
                 // -2 godziny myslenia co bylo zepsute tutaj jest, prosze nie ruszac co by sie nie dzialo bo to moj cenny czas i nic mi go nie odda. w najgorszym wypadku zakomentowac i zostawic na samym dole.
                 if (clickedTower.isGhost)
                     return;
-                if (clickedTower.justPlaced)
-                {
-                    clickedTower.justPlaced = false;
-                    return;
-                }
 
                     // jeœli inna wie¿a by³a aktywna, ukryj jej zasiêg
                 if (activeTower != null && activeTower != clickedTower)

@@ -46,6 +46,8 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
+        autoStartNextWave = PlayerPrefs.GetInt("AutoStartNextWave", 0) == 1;    // Bierzemy autostart z ustawieñ.
+
         // przycisk nastepnej fali
         if (nextWaveButton != null)
             nextWaveButton.onClick.AddListener(() => StartNextWave());
@@ -144,9 +146,9 @@ public class WaveSystem : MonoBehaviour
         if (waveInfoText != null)
         {
             if (currentWaveIndex < 0)
-                waveInfoText.text = $"Fala: 0 / {waves.Length}";
+                waveInfoText.text = $"Wave: 0 / {waves.Length}";
             else
-                waveInfoText.text = $"Fala: {currentWaveIndex + 1} / {waves.Length}";
+                waveInfoText.text = $"Wave: {currentWaveIndex + 1} / {waves.Length}";
         }
     }
 }

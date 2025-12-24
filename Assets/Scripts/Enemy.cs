@@ -119,6 +119,8 @@ public class Enemy : MonoBehaviour
         currentMaxHealth = baseMaxHealth;
         health = currentMaxHealth;
         UpdateHealhBar();
+        if (gameObject.name.StartsWith("Boss"))
+            GameManager.Instance.BossAnnouncement();
     }
 
 

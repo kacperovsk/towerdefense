@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class LevelSelectorController : MonoBehaviour
 {
-    public bool testUnlockAllMaps = true; // ustaw true na czas testów
+    public bool testUnlockAllMaps; // ustaw true na czas testów
 
     private int currentMap = 0;
     private int lastMapIndex;
@@ -28,8 +28,9 @@ public class LevelSelectorController : MonoBehaviour
 
     string[] mapScenes = {
         "GameMap0",
-        "GameMap1"
-        // DO ROZSZERZENIA JAK BEDZIE WIECEJ MAP
+        "GameMap1",
+        "GameMap2",
+        "GameMap3"
     };
 
     bool[] unlocked;
