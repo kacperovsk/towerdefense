@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: -7371822249899153996, guid: f0b8bc630e4951d4590275021d690b96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -7371822249899153996, guid: f0b8bc630e4951d4590275021d690b96, type: 3}
   towerName: Catapult
+  towerDescription: Shoots a rock dealing massive area damage
   cost: 400
   range: 5
   fireRate: 0.25

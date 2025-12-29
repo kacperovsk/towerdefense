@@ -7,8 +7,10 @@ using UnityEngine.UI;
 
 public class LevelSelectorController : MonoBehaviour
 {
-    public bool testUnlockAllMaps; // ustaw true na czas testów
+    [Header("Odblokowuje wszystkie mapy")]
+    public bool testUnlockAllMaps;
 
+    [Header("Pola")]
     private int currentMap = 0;
     private int lastMapIndex;
     public Image mapImage;

@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Farma
   towerIcon: {fileID: 3910393409140172825, guid: c9834678da7620543b4b2bdedbcddbac, type: 3}
   towerName: Farm
+  towerDescription: Generates 10 gold each wave
   cost: 150
   range: 0
   fireRate: 0
@@ -117,7 +118,7 @@ MonoBehaviour:
   shootPoint: {fileID: 0}
   currentShotType: 0
   sideShotAngle: 20
-  goldPerWave: 50
+  goldPerWave: 10
 --- !u!61 &1551183063598298544
 BoxCollider2D:
   m_ObjectHideFlags: 0

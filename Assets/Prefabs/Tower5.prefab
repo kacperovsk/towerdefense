@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: -3918393090873308021, guid: 350f74a97d3ae624da799bd8915f9b56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -3918393090873308021, guid: 350f74a97d3ae624da799bd8915f9b56, type: 3}
   towerName: Tar Thrower
+  towerDescription: Shoots barrels leaving slowing (25%) pool of tar
   cost: 75
   range: 2
   fireRate: 1

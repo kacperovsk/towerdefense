@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4482804576f94804bb85a446efa1a89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelectorController
-  testUnlockAllMaps: 0
+  testUnlockAllMaps: 1
   mapImage: {fileID: 1886282428}
   mapText: {fileID: 1747299903}
   highscoreText: {fileID: 847793292}
