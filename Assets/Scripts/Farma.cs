@@ -32,24 +32,27 @@ public class Farma : Tower
         //    waveActive = false;
         //}
     }
-
     private void Start()
     {
         if (isGhost)
+        {
             return;
-
+        }
+            
         if (GameManager.Instance != null)
         {
             GameManager.Instance.passiveGoldIncome += goldPerWave;
             Debug.Log($"+{goldPerWave} passive gold (Farma placed)");
+            towerDescription = $"Generates {goldPerWave} each wave";
         }
+
     }
 
     private void OnDestroy()
     {
         if (isGhost)
             return;
-
+        
         if (GameManager.Instance != null)
         {
             GameManager.Instance.passiveGoldIncome -= goldPerWave;

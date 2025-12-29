@@ -5,15 +5,17 @@ public struct TowerStats
 {
     public Sprite towerIcon;
     public string towerName;
+    public string towerDescription;
     public float damage;
     public float fireRate;
     public float range;
     public float cost;
 
-    public TowerStats(Sprite icon, string name, float dmg, float rate, float rng, float cost_)
+    public TowerStats(Sprite icon, string name, string desc, float dmg, float rate, float rng, float cost_)
     {
         towerIcon = icon;
         towerName = name;
+        towerDescription = desc;
         damage = dmg;
         fireRate = rate;
         range = rng;
@@ -26,6 +28,7 @@ public class Tower : MonoBehaviour
     [Header("Basic Info")]
     [SerializeField] public Sprite towerIcon;
     [SerializeField] public string towerName;
+    [SerializeField] public string towerDescription;
     [SerializeField] public int cost;
 
     [Header("Base Stats")]
@@ -314,6 +317,6 @@ public class Tower : MonoBehaviour
 
     public TowerStats GetStats()
     {
-        return new TowerStats(towerIcon, towerName, damage, fireRate, range, cost);
+        return new TowerStats(towerIcon, towerName,towerDescription, damage, fireRate, range, cost);
     }
 }

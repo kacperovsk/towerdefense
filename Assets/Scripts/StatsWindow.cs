@@ -12,6 +12,7 @@ public class StatsWindow : MonoBehaviour
     public TextMeshProUGUI attackspeedText;
     public TextMeshProUGUI radiusText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI descriptionText;
     public Image costIcon;
     public bool hoveredOver = false;
     public Button sellButton;
@@ -41,6 +42,7 @@ public class StatsWindow : MonoBehaviour
         damageText.text = $"Damage: {stats.damage}";
         attackspeedText.text = $"AS: {stats.fireRate}";
         radiusText.text = $"Range: {stats.range}";
+        descriptionText.text = stats.towerDescription.ToString();
         if (hoveredOver)
         {
             costText.text = stats.cost.ToString();

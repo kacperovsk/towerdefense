@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: -2801409215071612346, guid: c5986cf7464c0e84bb2e2c3c8ae568ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   towerIcon: {fileID: -2801409215071612346, guid: c5986cf7464c0e84bb2e2c3c8ae568ad, type: 3}
   towerName: Mage
+  towerDescription: Shoots fireballs dealing AoE damage
   cost: 125
   range: 2
   fireRate: 1

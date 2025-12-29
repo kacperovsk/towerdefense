@@ -157,19 +157,53 @@ public class GameManager : MonoBehaviour
     // SPEED CONTROLLER
     private bool isDoubleSpeed = false; // czy jest włączone x2 speed
     [SerializeField] private Button speedUpButton;
+    private bool isOctupleSpeed = false; // czy jest włączone x8 speed
+    [SerializeField] private Button speedUpOctupleButton;
     public void ToggleDoubleSpeed()
     {
         isDoubleSpeed = !isDoubleSpeed;
 
-        if (isDoubleSpeed)
+        if (isDoubleSpeed && !isOctupleSpeed)
         {
             Time.timeScale = 2f; // podwójna prędkość
             speedUpButton.image.color = Color.green;
+        }
+        else if(isDoubleSpeed && isOctupleSpeed)
+        {
+            Time.timeScale = 2f;
+            speedUpButton.image.color = Color.green;
+
+            isOctupleSpeed = false;
+            speedUpOctupleButton.image.color = Color.white;
         }
         else
         {
             Time.timeScale = 1f; // normalna prędkość
             speedUpButton.image.color = Color.white;
+        }
+    }
+    
+    public void ToggleOctupleSpeed()
+    {
+        isOctupleSpeed = !isOctupleSpeed;
+
+        if (isOctupleSpeed && !isDoubleSpeed)
+        {
+            Time.timeScale = 8f; // osmiokrotna prędkość
+            speedUpOctupleButton.image.color = Color.green;
+        }
+        else if (isOctupleSpeed && isDoubleSpeed)
+        {
+            Time.timeScale = 8f;
+            speedUpOctupleButton.image.color = Color.green;
+
+            isDoubleSpeed = false;
+            speedUpButton.image.color = Color.white;
+        }
+        else
+        {
+            Time.timeScale = 1f; // normalna prędkość
+            speedUpOctupleButton.image.color = Color.white;
         }
     }
 
@@ -184,6 +218,8 @@ public class GameManager : MonoBehaviour
             // Wznawianie
             if (isDoubleSpeed)
                 Time.timeScale = 2f;
+            else if (isOctupleSpeed)
+                Time.timeScale = 8f;
             else
                 Time.timeScale = 1f;
             isPaused = false;
@@ -203,7 +239,7 @@ public class GameManager : MonoBehaviour
         ConfirmationMenu.Instance.Show(() =>
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("MainMenu");   // Wylaczone do testow.
+            SceneManager.LoadScene("MainMenu");
             PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
             PlayerPrefs.Save();
         });
@@ -211,8 +247,13 @@ public class GameManager : MonoBehaviour
 
     public void GoToMenuNoConfirm()
     {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene("MainMenu");   // Wylaczone do testow.
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void TryAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     // Tymczasowe rozwiazanie wielu skryptów do stawiania wież.
@@ -226,8 +267,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         winPanel.SetActive(true);
 
-        scoreText.gameObject.SetActive(true);
-        highscoreText.gameObject.SetActive(true);
+        scoresText.SetActive(true);
 
         int finalScore = CalculateScore();
         string sceneName = SceneManager.GetActiveScene().name;
@@ -251,8 +291,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         losePanel.SetActive(true);
 
-        scoreText.gameObject.SetActive(true);
-        highscoreText.gameObject.SetActive(true);
+        scoresText.SetActive(true);
 
         int finalScore = CalculateScore();
         finalScore = finalScore / 2;    // na przegranej jest 0.5x pktow
@@ -299,6 +338,7 @@ public class GameManager : MonoBehaviour
     [Header("Score")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highscoreText;
+    public GameObject scoresText;
     private int totalEnemiesDefeated = 0;
 
     public void RegisterEnemyDefeat()

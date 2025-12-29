@@ -93,7 +93,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 1367220005940526458, guid: cc4edf5e68831cb49a17cfae8c08bfea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AoEOnHit
   radius: 2
-  damage: 10
+  damageMultiplier: 1
   falloff: 0.5
   indicatorPrefab: {fileID: 3164844315230997361, guid: 9c221e0dad471db49a13ac49fcf7f1d8, type: 3}
   displayTime: 0.3

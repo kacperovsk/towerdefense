@@ -1,3 +1,5 @@
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 [System.Serializable]
@@ -26,8 +28,16 @@ public class WaveLoader : MonoBehaviour
 
     void Awake()
     {
-        TextAsset json = Resources.Load<TextAsset>("waves");
+        TextAsset json;
+        if (SceneManager.GetActiveScene().name == "GameMap0")
+        {
+             json = Resources.Load<TextAsset>("waves2"); // do tutorialu tylko...
+        }
 
+        else
+        {
+            json = Resources.Load<TextAsset>("waves");
+        }
         WavePack pack = JsonUtility.FromJson<WavePack>(json.text);
 
         waveSystem.waves = new WaveSystem.WaveData[pack.waves.Length];
