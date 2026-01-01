@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5550366137526433066}
   - component: {fileID: -4320600393154117394}
   m_Layer: 0
-  m_Name: Boss2
+  m_Name: Boss2_BossWave
   m_TagString: Enemy
   m_Icon: {fileID: 2800000, guid: 5666d97642e2b6e4b963af7b20d9d7af, type: 3}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   playerDamage: 99
   currentPlayerDamage: 99
   moneyValue: 200
-  data: {fileID: 11400000, guid: c96bc71ec6576d74f9ee6d99e5cd4579, type: 2}
+  data: {fileID: 11400000, guid: 0bda233c9136d08489f6c9767f84d0ef, type: 2}
 --- !u!212 &4941225622946099113
 SpriteRenderer:
   m_ObjectHideFlags: 0

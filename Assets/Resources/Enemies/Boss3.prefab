@@ -85,11 +85,11 @@ MonoBehaviour:
   moveSpeed: 0.5
   currentMoveSpeed: 0.5
   currentPath: {fileID: 0}
-  baseMaxHealth: 3500
-  health: 3500
+  baseMaxHealth: 10000
+  health: 10000
   healthBar: {fileID: 5083107192220952430}
-  playerDamage: 99
-  currentPlayerDamage: 99
+  playerDamage: 100
+  currentPlayerDamage: 100
   moneyValue: 300
   data: {fileID: 11400000, guid: c01853bb707fb804da29dd8806b239e3, type: 2}
 --- !u!212 &4941225622946099113
