@@ -143,6 +143,9 @@ public class SkryptDodania: MonoBehaviour
             if (hit.gameObject == currentGhostTower)
                 continue; // ignoruj własną wieżę
 
+            if (hit.gameObject.layer == LayerMask.NameToLayer("PlacementBlocker"))
+                return false;
+
             // Kolizja z inną wieżą
             if (hit.gameObject.layer == LayerMask.NameToLayer("Tower"))
                 return false;
