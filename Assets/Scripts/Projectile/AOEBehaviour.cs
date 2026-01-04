@@ -7,7 +7,7 @@ public class AoEOnHit : MonoBehaviour
     [Header("AOE Settings")]
     public float radius = 3f;          // promień AoE
     public float damageMultiplier = 1f;        // obrażenia centralne
-    [Range(0f,1f)] public float falloff = 0.5f; // procent dmg dla pobliskich celów
+    [Range(0f,1f)] public float falloff = 1f; // procent dmg dla pobliskich celów
 
     [Header("Visual Indicator")]
     public GameObject indicatorPrefab; // prefab przezroczystego okręgu

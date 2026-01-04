@@ -109,9 +109,9 @@ MonoBehaviour:
   towerName: Trebuchet
   towerDescription: Shoots 3 projectiles in spread
   cost: 200
-  range: 3.5
-  fireRate: 0.7
-  damage: 4
+  range: 3.2
+  fireRate: 0.8
+  damage: 5
   isGhost: 0
   justPlaced: 0
   projectilePrefab: {fileID: 1483898852620040137, guid: cd91ec74bc47a0f4993c4ed126502e52, type: 3}

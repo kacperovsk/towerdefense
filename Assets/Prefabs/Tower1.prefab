@@ -108,9 +108,9 @@ MonoBehaviour:
   towerIcon: {fileID: 2737714728287120070, guid: 0aafba2b9023fb24182856dd3a6228ad, type: 3}
   towerName: Archer
   towerDescription: Shoots arrows
-  cost: 75
+  cost: 50
   range: 2
-  fireRate: 1
+  fireRate: 1.1
   damage: 4
   isGhost: 0
   justPlaced: 0

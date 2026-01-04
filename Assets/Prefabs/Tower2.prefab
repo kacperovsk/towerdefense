@@ -108,9 +108,9 @@ MonoBehaviour:
   towerIcon: {fileID: 5559667929427957976, guid: 37f5270afa7026643893ae612a5e469b, type: 3}
   towerName: Crossbow
   towerDescription: Shoots piercing bolts
-  cost: 100
+  cost: 125
   range: 2.5
-  fireRate: 0.8
+  fireRate: 0.7
   damage: 5
   isGhost: 0
   justPlaced: 0

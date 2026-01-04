@@ -110,8 +110,8 @@ MonoBehaviour:
   towerDescription: Shoots powerful bolt at long range
   cost: 250
   range: 5
-  fireRate: 0.75
-  damage: 10
+  fireRate: 0.65
+  damage: 20
   isGhost: 0
   justPlaced: 0
   projectilePrefab: {fileID: 1483898852620040137, guid: 905b131f98166c648ae60c15fea6c40c, type: 3}

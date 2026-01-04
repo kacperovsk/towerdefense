@@ -63,7 +63,7 @@ public class MainMenuController : MonoBehaviour
     }
     public void CancelOptions()
     {
-        float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.2f);
 
         musicSlider.SetValueWithoutNotify(savedVolume);
         AudioListener.volume = savedVolume;
@@ -74,6 +74,21 @@ public class MainMenuController : MonoBehaviour
         optionsPanel.SetActive(false);
     }
 
+    public void ResetData()
+    {
+        ConfirmationMenu.Instance.Show(() =>
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+
+            float defaultVolume = 0.2f;
+            musicSlider.SetValueWithoutNotify(defaultVolume);
+            MusicManager.Instance.SetVolume(defaultVolume);
+            AudioListener.volume = defaultVolume;
+
+            autoStartToggle.SetIsOnWithoutNotify(false);
+        });
+    }
     public void OnMusicVolumeChanged()
     {
         MusicManager.Instance.SetVolume(musicSlider.value);

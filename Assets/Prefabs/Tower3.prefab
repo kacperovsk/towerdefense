@@ -109,7 +109,7 @@ MonoBehaviour:
   towerName: Catapult
   towerDescription: Shoots a rock dealing massive area damage
   cost: 400
-  range: 5
+  range: 4.4
   fireRate: 0.25
   damage: 10
   isGhost: 0

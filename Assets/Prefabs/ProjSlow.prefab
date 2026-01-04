@@ -119,5 +119,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlowOnHitBehaviour
   slowAreaPrefab: {fileID: 952523311577862707, guid: adb5902194cac614fb8ad46f888d98d2, type: 3}
   radius: 3
-  slowMultiplier: 0.75
+  slowMultiplier: 0.7
   duration: 3

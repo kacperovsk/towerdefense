@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597418eb493bc8641852d8a891baeb22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 6
+  speed: 8
 --- !u!212 &6281537190067084632
 SpriteRenderer:
   m_ObjectHideFlags: 0
