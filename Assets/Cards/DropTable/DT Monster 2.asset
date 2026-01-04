@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a905218c6b538a841a24c46fbac4aee5, type: 3}
   m_Name: DT Monster 2
   m_EditorClassIdentifier: Assembly-CSharp::CardDropTable
-  overallDropChance: 0.5
+  overallDropChance: 0.8
   rarityChances:
   - rarity: 0
     chance: 84.7
