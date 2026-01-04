@@ -42,8 +42,6 @@ public class WaveSystem : MonoBehaviour
     private bool isSpawning = false; // czy obecnie sie spawnia
     private int enemiesAlive = 0; // ilu zyje obecnie
 
-    public GameManager gameManager; // do Wygranej.
-
     private void Start()
     {
         autoStartNextWave = PlayerPrefs.GetInt("AutoStartNextWave", 0) == 1;    // Bierzemy autostart z ustawieñ.
@@ -113,22 +111,18 @@ public class WaveSystem : MonoBehaviour
     {
         enemiesAlive--;
 
-        if (gameManager != null)
-            gameManager.RegisterEnemyDefeat();
+        GameManager.Instance?.RegisterEnemyDefeat();
 
         // jak przeciwnicy nie zyja to mozemy rozpoczac kolejna fale
         if (enemiesAlive <= 0 )
         {
             // passive gold co fale
-            GameManager.Instance.GrantPassiveIncome();
+            GameManager.Instance?.GrantPassiveIncome();
 
             if (currentWaveIndex >= waves.Length -1)
             {
                 // Wygrana
-                if (gameManager != null)
-                    gameManager.ShowWinnerPanel();
-                else
-                    Debug.Log("Brakuje gameManager w WaveSystem.");
+                GameManager.Instance?.ShowWinnerPanel();
             }
             else if (autoStartNextWave)
                 StartCoroutine(AutoNextWave());

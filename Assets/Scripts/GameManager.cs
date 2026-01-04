@@ -256,6 +256,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void TryAgainConfirm()
+    {
+        ConfirmationMenu.Instance.Show(() =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        });
+    }
+
     // Tymczasowe rozwiazanie wielu skryptów do stawiania wież.
     [Header("Tower Placement Shared State")]
     public bool isPlacing = false;

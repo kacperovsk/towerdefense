@@ -108,7 +108,7 @@ MonoBehaviour:
   towerIcon: {fileID: 3910393409140172825, guid: c9834678da7620543b4b2bdedbcddbac, type: 3}
   towerName: Farm
   towerDescription: Generates 10 gold each wave
-  cost: 150
+  cost: 125
   range: 0
   fireRate: 0
   damage: 0

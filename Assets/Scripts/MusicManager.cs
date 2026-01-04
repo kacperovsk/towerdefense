@@ -17,7 +17,7 @@ public class MusicManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        float volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float volume = PlayerPrefs.GetFloat("MusicVolume", 0.2f);
         source.volume = volume;
         source.Play();
     }

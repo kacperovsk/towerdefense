@@ -108,9 +108,9 @@ MonoBehaviour:
   towerIcon: {fileID: -2801409215071612346, guid: c5986cf7464c0e84bb2e2c3c8ae568ad, type: 3}
   towerName: Mage
   towerDescription: Shoots fireballs dealing AoE damage
-  cost: 125
+  cost: 175
   range: 2
-  fireRate: 1
+  fireRate: 1.1
   damage: 4
   isGhost: 0
   justPlaced: 0
