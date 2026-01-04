@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a905218c6b538a841a24c46fbac4aee5, type: 3}
   m_Name: DT Boss2_Waves
   m_EditorClassIdentifier: Assembly-CSharp::CardDropTable
-  overallDropChance: 100
+  overallDropChance: 10
   rarityChances:
   - rarity: 0
     chance: 0
   - rarity: 1
     chance: 0
   - rarity: 2
-    chance: 70
+    chance: 50
   - rarity: 3
-    chance: 25
+    chance: 40
   - rarity: 4
-    chance: 5
+    chance: 10

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: b1
   dropTable: {fileID: 11400000, guid: ef4d93ddcee818c459b135a9f4ae10d6, type: 2}
-  isBoss: 1
+  isBoss: 0
   secondCardChance: 20
