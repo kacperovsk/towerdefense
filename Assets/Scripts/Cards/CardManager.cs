@@ -24,10 +24,13 @@ public class CardManager : MonoBehaviour
 
     private void Update()
     {
+		//(CHEAT), mostly for testing purposes
+		/*
         if (Input.GetKeyDown(KeyCode.T))
         {
             DropRandomCard();
         }
+		*/
     }
     public void DropRandomCard()
     {

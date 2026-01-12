@@ -254,6 +254,7 @@ public class GameManager : MonoBehaviour
     public void TryAgain()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		Time.timeScale = 1f;
     }
 
     public void TryAgainConfirm()
@@ -261,6 +262,7 @@ public class GameManager : MonoBehaviour
         ConfirmationMenu.Instance.Show(() =>
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			Time.timeScale = 1f;
         });
     }
 
